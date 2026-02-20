@@ -6,7 +6,6 @@
   align-items: center;
   position: relative;
   overflow: hidden;
-  background-color: var(--bg-color);
   transition: background-color 0.4s ease;
 }
 
@@ -126,13 +125,10 @@
 }
 
 .ojoImg {
-  width: 110px;
-  height: auto;
-  opacity: 0.85;
+  width: 300px;
+  left: 18%;
+  opacity: 1;
   filter: drop-shadow(0 4px 8px rgba(0,0,0,0.18));
-  flex-shrink: 0;
-  align-self: flex-end;
-  margin-bottom: 10px;
 }
 
 .birdImg {
@@ -186,5 +182,5 @@
   .heroText h3 { font-size: 2.5rem; }
   .heroText p  { font-size: 2rem; }
   .birdImg     { width: 150px; }
-  .ojoImg      { width: 55px; }
+  .ojoImg      { width: 1500px; }
 }

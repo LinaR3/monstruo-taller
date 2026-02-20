@@ -1,9 +1,9 @@
 import styles from './Footer.module.css'
 
-const WHATSAPP_NUMBER = '573001234567'
+const WHATSAPP_NUMBER = '573133314271'
 const WHATSAPP_URL    = `https://wa.me/${WHATSAPP_NUMBER}`
-const INSTAGRAM_URL   = 'https://instagram.com/monstruotaller'
-const EMAIL           = 'hola@monstruotaller.com'
+const INSTAGRAM_URL   = 'https://www.instagram.com/monstruo.taller/'
+const EMAIL           = 'https://www.instagram.com/mun.ilustra/'
 
 export default function Footer() {
   return (
@@ -20,7 +20,7 @@ export default function Footer() {
 
         {/* Derecha — Contacto */}
         <div className={styles.contact}>
-          <span className={styles.contactLabel}>Contácto</span>
+          <span className={styles.contactLabel}>Contáctanos</span>
           <div className={styles.icons}>
 
             {/* Instagram */}

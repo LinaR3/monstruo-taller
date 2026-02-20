@@ -1,16 +1,11 @@
 import styles from './AsesorSection.module.css'
 
-const WHATSAPP_NUMBER = '573001234567'
+const WHATSAPP_NUMBER = '573133314271'
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hola! Me gustaría hablar con un asesor de Monstruo Taller 👋')}`
 
 export default function AsesorSection() {
   return (
     <section className={styles.section}>
-
-      {/* Mancha de fondo */}
-      <div className={styles.bgBlob} aria-hidden="true">
-        <img src="/shadows_white.png" alt="" className={styles.bgImg} />
-      </div>
 
       <div className={styles.inner}>
 

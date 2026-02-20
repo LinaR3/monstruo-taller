@@ -7,7 +7,7 @@ import { ChevronRight, ChevronLeft, ShoppingCart } from 'lucide-react'
 import { products, formatPrice } from '@/lib/products'
 import styles from './FeaturedSection.module.css'
 
-const WHATSAPP_NUMBER = '573133314271'
+const WHATSAPP_NUMBER = '+573133314271'
 
 const categoryLabel: Record<string, string> = {
   libretas: 'Libreta', camisetas: 'Camiseta', prints: 'Print', totebags: 'Totebag',

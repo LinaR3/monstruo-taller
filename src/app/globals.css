@@ -30,6 +30,21 @@
   src: url(https://fonts.gstatic.com/s/mavenpro/v40/7Au9p_AqnyWWAxW2Wk3GzWQIElsO0w.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
+/*variable body background-color: shadow para consistencia en todo el proyecto*/
+body {
+  background-color: var(--bg-color);   
+  background-image: 
+    var(--shadow-img2),                
+    var(--shadow-img);                 
+  background-size: cover;              
+  background-position: center top;     
+  background-repeat: no-repeat;
+  color: var(--text-color);
+  font-family: var(--font-ui);
+  overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
+  min-height: 100vh;                   
+}
 
 /* ─── VARIABLES LIGHT (default) ─── */
 :root {
@@ -41,7 +56,7 @@
   --shadow-sm:      2px 2px 0px 0px rgba(0,0,0,1);
   --shadow-img:     url('/shadows_black.png');
   --shadow-img2:    url('/shadows_white.png');
-  --shadow-opacity: 0.08;
+  --shadow-opacity: 1;
   --font-artistic:  'Barrio', system-ui;
   --font-ui:        'Maven Pro', sans-serif;
 }
@@ -54,7 +69,7 @@
   --card-bg:        #2a1f10;
   --shadow:         4px 4px 0px 0px rgba(249,235,222,0.6);
   --shadow-sm:      2px 2px 0px 0px rgba(249,235,222,0.6);
-  --shadow-opacity: 0.12;
+  --shadow-opacity: 1;
 }
 
 /* ─── RESET ─── */
@@ -65,7 +80,7 @@ body {
   color: var(--text-color);
   font-family: var(--font-ui);
   overflow-x: hidden;
-  transition: background-color 0.4s ease, color 0.4s ease;
+  transition: background-color s ease, color 0.4s ease;
 }
 a  { text-decoration: none; color: inherit; }
 ul { list-style: none; padding: 0; margin: 0; }
