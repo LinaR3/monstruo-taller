@@ -4,28 +4,39 @@
   left: 0;
   width: 100%;
   z-index: 1000;
-  background-color: #FCD5CE;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  background-color: #F9EBDE;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  transition: background-color 0.4s ease;
+}
+
+[data-theme='dark'] .header {
+  background-color: #1a1008;
 }
 
 .nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 40px;
+  padding: 10px 40px;
   max-width: 1400px;
   margin: 0 auto;
+  height: 70px;
 }
 
-.logo {
+/* ─── Logo ─── */
+.logoLink {
   display: flex;
   align-items: center;
+  flex-shrink: 0;
 }
 
 .logoImg {
+  height: 48px;
+  width: auto;
   object-fit: contain;
 }
 
+/* ─── Menú ─── */
 .menu {
   display: flex;
   gap: 40px;
@@ -35,7 +46,7 @@
 .menu a {
   font-family: var(--font-ui);
   font-weight: 700;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   letter-spacing: 1.5px;
   text-transform: uppercase;
   position: relative;
@@ -49,32 +60,32 @@
   left: 0;
   width: 0;
   height: 2px;
-  background: #000;
+  background: currentColor;
   transition: width 0.25s ease;
 }
 
-.menu a:hover::after {
-  width: 100%;
-}
+.menu a:hover::after { width: 100%; }
 
+/* ─── Acciones ─── */
 .actions {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .btnTienda {
   background: white;
   border: 2px solid black;
-  padding: 8px 22px;
+  padding: 7px 20px;
   border-radius: 10px;
   font-family: var(--font-ui);
   font-weight: 900;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   letter-spacing: 1px;
   box-shadow: var(--shadow);
   transition: all 0.1s;
   text-transform: uppercase;
+  color: #000;
 }
 
 .btnTienda:hover {
@@ -86,34 +97,77 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   background: white;
   border: 2px solid black;
   box-shadow: var(--shadow-sm);
-  transition: transform 0.1s;
   color: #000;
+  transition: transform 0.1s;
 }
 
-.cartBtn:hover {
-  transform: translate(1px, 1px);
+.cartBtn:hover { transform: translate(1px, 1px); }
+
+/* ─── Theme Toggle ─── */
+.themeToggle {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
+.toggleTrack {
+  display: flex;
+  align-items: center;
+  width: 44px;
+  height: 22px;
+  border-radius: 11px;
+  background: #e0cfc8;
+  border: 1.5px solid rgba(0,0,0,0.3);
+  position: relative;
+  transition: background 0.3s;
+}
+
+.toggleThumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: white;
+  border: 1px solid rgba(0,0,0,0.15);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: absolute;
+  left: 2px;
+  color: #333;
+}
+
+.toggleDark .toggleThumb {
+  transform: translateX(22px);
+  background: #F9EBDE;
+  color: #1a1008;
+}
+
+.toggleDark {
+  background: #3a2a18;
+}
+
+/* ─── Hamburguesa ─── */
 .hamburger {
   display: none;
   align-items: center;
   justify-content: center;
 }
 
+/* ─── Mobile ─── */
 @media (max-width: 768px) {
-  .nav {
-    padding: 12px 20px;
-  }
-
-  .hamburger {
-    display: flex;
-  }
+  .nav { padding: 10px 16px; height: 60px; }
+  .logoImg { height: 38px; }
+  .hamburger { display: flex; }
 
   .menu {
     display: none;
@@ -121,21 +175,13 @@
     top: 100%;
     left: 0;
     width: 100%;
-    background: #FCD5CE;
+    background: #F9EBDE;
     flex-direction: column;
     gap: 0;
-    padding: 10px 0 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 10px 0 16px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   }
 
-  .menu.menuOpen {
-    display: flex;
-  }
-
-  .menu a {
-    padding: 14px 20px;
-    width: 100%;
-    text-align: center;
-    font-size: 1rem;
-  }
+  .menu.menuOpen { display: flex; }
+  .menu a { padding: 12px 20px; width: 100%; text-align: center; }
 }

@@ -1,0 +1,116 @@
+.section {
+  position: relative;
+  background-color: var(--bg-color);
+  padding: 60px 40px 80px;
+  overflow: hidden;
+  transition: background-color 0.4s ease;
+}
+
+/* Mancha fondo */
+.bgBlob {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.bgImg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0.25;
+}
+
+/* Layout dos columnas */
+.inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+
+/* Imagen izquierda */
+.imageWrap {
+  flex: 0 0 auto;
+  width: min(380px, 40vw);
+}
+
+.illustration {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.12));
+}
+
+/* Card derecha */
+.card {
+  flex: 1;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(0,0,0,0.12);
+  border-radius: 16px;
+  padding: 40px 44px;
+}
+
+[data-theme='dark'] .card {
+  background: rgba(42,31,16,0.7);
+  border-color: rgba(249,235,222,0.15);
+}
+
+.cardTitle {
+  font-family: var(--font-ui);
+  font-weight: 900;
+  font-size: 1.6rem;
+  letter-spacing: 1px;
+  margin-bottom: 14px;
+  color: var(--text-color);
+}
+
+.cardDesc {
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+[data-theme='dark'] .cardDesc { color: #bba990; }
+
+/* Botón WhatsApp */
+.whatsappBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  color: #000;
+  border: 2px solid #000;
+  padding: 12px 28px;
+  border-radius: 12px;
+  font-family: var(--font-ui);
+  font-weight: 800;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  box-shadow: var(--shadow);
+  transition: all 0.1s;
+}
+
+.whatsappBtn:hover {
+  transform: translate(2px, 2px);
+  box-shadow: var(--shadow-sm);
+}
+
+[data-theme='dark'] .whatsappBtn {
+  background: #F9EBDE;
+  border-color: #F9EBDE;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .section { padding: 40px 20px 60px; }
+  .inner   { flex-direction: column; gap: 30px; }
+  .imageWrap { width: min(280px, 70vw); }
+  .card    { padding: 28px 24px; }
+  .cardTitle { font-size: 1.3rem; }
+}
