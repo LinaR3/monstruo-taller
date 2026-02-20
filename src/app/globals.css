@@ -5,7 +5,6 @@
   font-weight: 400;
   font-display: swap;
   src: url(https://fonts.gstatic.com/s/barrio/v20/wEO8EBXBk8hBIDi0fAwge9gH1HIe.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 @font-face {
   font-family: 'Barrio';
@@ -20,68 +19,88 @@
   font-style: normal;
   font-weight: 400 900;
   font-display: swap;
-  src: url(https://fonts.gstatic.com/s/mavenpro/v40/7Au9p_AqnyWWAxW2Wk3GwmQIElsO02Ex.woff2) format('woff2');
-}
-@font-face {
-  font-family: 'Maven Pro';
-  font-style: normal;
-  font-weight: 400 900;
-  font-display: swap;
   src: url(https://fonts.gstatic.com/s/mavenpro/v40/7Au9p_AqnyWWAxW2Wk3GzWQIElsO0w.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-/*variable body background-color: shadow para consistencia en todo el proyecto*/
-body {
-  background-color: var(--bg-color);   
-  background-image: 
-    var(--shadow-img2),                
-    var(--shadow-img);                 
-  background-size: cover;              
-  background-position: center top;     
-  background-repeat: no-repeat;
-  color: var(--text-color);
-  font-family: var(--font-ui);
-  overflow-x: hidden;
-  transition: background-color 0.4s ease, color 0.4s ease;
-  min-height: 100vh;                   
-}
 
-/* ─── VARIABLES LIGHT (default) ─── */
+/* ─── VARIABLES LIGHT ─── */
 :root {
-  --bg-color:       #F9EBDE;
-  --text-color:     #000000;
-  --nav-bg:         #F9EBDE;
-  --card-bg:        #ffffff;
-  --shadow:         4px 4px 0px 0px rgba(0,0,0,1);
-  --shadow-sm:      2px 2px 0px 0px rgba(0,0,0,1);
-  --shadow-img:     url('/shadows_black.png');
-  --shadow-img2:    url('/shadows_white.png');
-  --shadow-opacity: 1;
-  --font-artistic:  'Barrio', system-ui;
-  --font-ui:        'Maven Pro', sans-serif;
+  --bg-color:      #F9EBDE;
+  --text-color:    #000000;
+  --nav-bg:        #F9EBDE;
+  --card-bg:       #ffffff;
+  --shadow:        4px 4px 0px 0px rgba(0,0,0,1);
+  --shadow-sm:     2px 2px 0px 0px rgba(0,0,0,1);
+  --font-artistic: 'Barrio', system-ui;
+  --font-ui:       'Maven Pro', sans-serif;
 }
 
 /* ─── VARIABLES DARK ─── */
 [data-theme='dark'] {
-  --bg-color:       #1a1008;
-  --text-color:     #F9EBDE;
-  --nav-bg:         #1a1008;
-  --card-bg:        #2a1f10;
-  --shadow:         4px 4px 0px 0px rgba(249,235,222,0.6);
-  --shadow-sm:      2px 2px 0px 0px rgba(249,235,222,0.6);
-  --shadow-opacity: 1;
+  --bg-color:   #1a1008;
+  --text-color: #F9EBDE;
+  --nav-bg:     #1a1008;
+  --card-bg:    #2a1f10;
+  --shadow:     4px 4px 0px 0px rgba(249,235,222,0.6);
+  --shadow-sm:  2px 2px 0px 0px rgba(249,235,222,0.6);
 }
 
 /* ─── RESET ─── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
+
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
   font-family: var(--font-ui);
   overflow-x: hidden;
-  transition: background-color s ease, color 0.4s ease;
+  transition: background-color 0.4s ease, color 0.4s ease;
+  min-height: 100vh;
+  position: relative;
 }
+
+/* Pseudo-elemento :: before = shadows_white (siempre visible) */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url('/shadows_white.png');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  opacity: 0.45;
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity 0.4s ease;
+}
+
+/* Pseudo-elemento ::after = shadows_black (aparece al scroll) */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url('/shadows_black.png');
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  transform: rotate(180deg);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity 1s ease;
+}
+
+/* Clase que activa JS al llegar al featured section */
+body.shadow-scroll::after {
+  opacity: 0.35;
+}
+
+[data-theme='dark'] body::before,
+body[data-theme='dark']::before { opacity: 0.04; }
+[data-theme='dark'] body::after,
+body[data-theme='dark']::after  { opacity: 0; }
+[data-theme='dark'] body.shadow-scroll::after { opacity: 0.10; }
+
 a  { text-decoration: none; color: inherit; }
 ul { list-style: none; padding: 0; margin: 0; }
 img { display: block; max-width: 100%; }

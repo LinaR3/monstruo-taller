@@ -1,40 +1,15 @@
+/* ─── HERO ─── */
 .hero {
   text-align: center;
-  padding-top: 70px;
+  padding-top: 140px;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
   overflow: hidden;
-  transition: background-color 0.4s ease;
 }
 
-/* ─── Manchas de fondo ─── */
-.shadowsWrap {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.shadowWhite,
-.shadowBlack {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
-}
-
-.shadowWhite { opacity: 1; }
-.shadowBlack { opacity: 1; mix-blend-mode: multiply; }
-
-[data-theme='dark'] .shadowWhite { opacity: 1; }
-[data-theme='dark'] .shadowBlack { opacity: 1; mix-blend-mode: screen; }
-
-/* ─── Texto de fondo grande ─── */
+/* ─── TALL / ER de fondo ─── */
 .bgText {
   position: absolute;
   font-family: var(--font-artistic);
@@ -42,116 +17,179 @@
   line-height: 1;
   pointer-events: none;
   user-select: none;
-  z-index: 0;
+  z-index: 1;
 }
 
-/* MONSTRUO — fila superior, centrado */
-.bgMon {
-  font-size: 20vw;
-  top: 70px;
-  right: -8%;
-  width: 100%;
-  text-align: center;
-  letter-spacing: 3px;
-}
-
-/* TALL — segunda fila, derecha */
 .bgTall {
   font-size: 18rem;
-  top: 18%;
-  right: 0;
+  top: 19%;
+  right: 1%;
+  opacity: 0;
+  animation: slideFromLeft 0.9s cubic-bezier(0.22,1,0.36,1) 0.6s forwards;
 }
 
-/* ER — tercera fila, izquierda */
 .bger {
   font-size: 18rem;
-  top: 28%;
-  left: 18%;
+  top: 50rem;
+  left: 15%;
+  opacity: 0;
+  animation: slideFromRight 0.9s cubic-bezier(0.22,1,0.36,1) 1.0s forwards;
 }
 
-/* ─── Corazón ─── */
+/* ─── MONSTRUO en flujo ─── */
+.mainTitle {
+  font-family: var(--font-artistic);
+  font-size: 20vw;
+  width: 100%;
+  margin: 0;
+  line-height: 0.85;
+  position: relative;
+  z-index: 2;
+  letter-spacing: 3px;
+  color: var(--text-color);
+  opacity: 0;
+  animation: slideFromRight 0.9s cubic-bezier(0.22,1,0.36,1) 0.15s forwards;
+}
+
+/* ─── CORAZÓN ─── */
 .heroImageContainer {
-  margin-top: calc(20vw * -0.85);
+  margin-top: -24vw;
   position: relative;
   z-index: 10;
   width: 100%;
   max-width: 1000px;
   pointer-events: none;
+  opacity: 0;
+  animation: slideFromBottom 1s cubic-bezier(0.22,1,0.36,1) 0s forwards;
 }
 
 .heartImg {
   width: 100%;
   height: auto;
-  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.22));
+  filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3));
 }
 
-/* ─── Textos inferiores ─── */
-.heroText {
-  margin-top: 40px;
+/* ══════════════════════════════════════════
+   BLOQUE INFERIOR
+   Ratio del Figma: 4082 alto / 1441 ancho = 2.83
+   Usamos 100vw × 80vh para que quepa en pantalla
+══════════════════════════════════════════ */
+.bottomBlock {
   position: relative;
+  width: 100%;
+  height: 85vh;
+  overflow: hidden;
+  margin-top: 0;
+  margin-bottom: 120px;  /* espacio antes de COSITAS NUEVAS */
   z-index: 11;
 }
 
-.heroText h2 {
-  font-family: var(--font-artistic);
-  font-size: 7rem;
-  font-weight: 400;
-  line-height: 1;
+/* ─── PÁJARO — ocupa mitad derecha, imagen completa ─── */
+.birdImg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60%;
+  height: 100%;
+  object-fit: contain;
+  object-position: right top;
+  pointer-events: none;
+  animation: floatBird 4s ease-in-out 2s infinite;
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.12));
 }
 
-.heroText h3 {
-  font-family: var(--font-artistic);
-  font-size: 5rem;
-  font-weight: 400;
-  margin: 5px 0;
-}
-
-.heroText p {
-  font-family: var(--font-artistic);
-  font-size: 4rem;
-  font-weight: 400;
-  margin-top: 10px;
-}
-
-/* ─── Ojo + Pájaro ─── */
-.birdRow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  margin-top: 16px;
-  position: relative;
-  z-index: 12;
+/* ─── OJO ─── */
+.eyeWrap {
+  position: absolute;
+  top: 38%;
+  left: 4%;
+  z-index: 13;
 }
 
 .ojoImg {
-  width: 300px;
-  left: 18%;
-  opacity: 1;
-  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.18));
-}
-
-.birdImg {
-  width: min(800px, 75vw);
+  width: clamp(200px, 22vw, 360px);
   height: auto;
-  opacity: 0.9;
-  animation: floatBird 4s ease-in-out infinite;
-  filter: drop-shadow(0 5px 15px rgba(0,0,0,0.18));
+  opacity: 0.92;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.2));
+  animation: blink 2s ease-in-out infinite;
+  transform-origin: center center;
 }
 
-@keyframes floatBird {
-  0%   { transform: translateY(0px) rotate(0deg); }
-  50%  { transform: translateY(-15px) rotate(2deg); }
-  100% { transform: translateY(0px) rotate(0deg); }
+@keyframes blink {
+  0%   { transform: scaleY(1); }
+  40%  { transform: scaleY(1); }
+  47%  { transform: scaleY(0.04); }
+  54%  { transform: scaleY(1); }
+  70%  { transform: scaleY(1); }
+  77%  { transform: scaleY(0.04); }
+  84%  { transform: scaleY(1); }
+  100% { transform: scaleY(1); }
+}
+
+/* ─── TEXTOS — absolutos sobre la mitad izquierda ─── */
+.textLine {
+  position: absolute;
+  left: 4%;
+  z-index: 14;
+  /* animación scroll: entra de derecha a izquierda */
+  opacity: 0;
+  transform: translateX(100px);
+  transition: opacity 0.85s cubic-bezier(0.22,1,0.36,1),
+              transform 0.85s cubic-bezier(0.22,1,0.36,1);
+}
+
+.textVisible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* "LO LLAMAMOS MONSTRUO / PORQUE ES IMAGINARIO..." — arriba */
+.textTop {
+  top: 2%;
+  width: 55%;
+}
+
+/* "Y NADIE SABE CÓMO ES" — abajo del ojo */
+.textBottom {
+  top: 62%;
+  width: 44%;
+  transition-delay: 0.15s;
+}
+
+.textLine h2,
+.textLine h3 {
+  font-family: var(--font-artistic);
+  font-size: clamp(2.2rem, 5vw, 5.2rem);
+  font-weight: 400;
+  line-height: 1.15;
+  text-align: left;
+  color: var(--text-color);
+  white-space: nowrap;
+}
+
+.textLine p {
+  font-family: var(--font-artistic);
+  font-size: clamp(2rem, 4.5vw, 4.8rem);
+  font-weight: 400;
+  line-height: 3.5;
+  text-align: left;
+  color: var(--text-color);
+  white-space: nowrap;
 }
 
 /* ─── CTA ─── */
 .ctaWrap {
-  margin: 40px 0 80px;
+  display: inline-flexbox;
+  position: absolute;
+  bottom: 6%;
+  left: 4%;
+  z-index: 15;
+  opacity: 0;
+  animation: fadeUp 0.7s ease 1.6s forwards;
 }
 
 .ctaBtn {
-  display: inline-block;
+  display: inline-flexbox;
   background: var(--card-bg);
   border: 2px solid var(--text-color);
   padding: 14px 44px;
@@ -161,7 +199,7 @@
   font-size: 1rem;
   letter-spacing: 2px;
   box-shadow: var(--shadow);
-  transition: all 0.1s;
+  transition: transform 0.1s, box-shadow 0.1s;
   text-transform: uppercase;
   color: var(--text-color);
 }
@@ -171,16 +209,45 @@
   box-shadow: var(--shadow-sm);
 }
 
-/* ─── Mobile ─── */
-@media (max-width: 768px) {
-  .bgMon  { font-size: clamp(3rem, 20vw, 8rem); }
-  .bgTall { font-size: 6rem; top: 55%; left: 4px; right: auto; }
-  .bger   { font-size: 6rem; top: 65%; left: auto; right: 10px; }
+/* ─── KEYFRAMES ─── */
+@keyframes slideFromBottom {
+  from { opacity: 0; transform: translateY(100px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideFromRight {
+  from { opacity: 0; transform: translateX(150px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideFromLeft {
+  from { opacity: 0; transform: translateX(-150px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes floatBird {
+  0%   { transform: translateY(0) rotate(0deg); }
+  50%  { transform: translateY(-18px) rotate(1.5deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
 
+/* ─── MOBILE ─── */
+@media (max-width: 900px) {
+  .hero { padding-top: 100px; }
+  .mainTitle { font-size: 25vw; letter-spacing: -2px; }
   .heroImageContainer { margin-top: -10vw; max-width: 90%; }
-  .heroText h2 { font-size: 3.5rem; }
-  .heroText h3 { font-size: 2.5rem; }
-  .heroText p  { font-size: 2rem; }
-  .birdImg     { width: 150px; }
-  .ojoImg      { width: 1500px; }
+  .bgTall { font-size: 6rem; top: 55%; left: 20px; right: auto; }
+  .bger   { font-size: 6rem; top: 65rem; left: auto; right: 10px; }
+
+  .bottomBlock  { height: 140vw; margin-bottom: 60px; }
+  .birdImg      { width: 80%; top: 30%; right: 0; height: 70%; }
+  .textTop      { top: 2%; width: 90%; }
+  .textBottom   { top: 55%; width: 90%; }
+  .eyeWrap      { top: 40%; }
+
+  .textLine h2,
+  .textLine h3  { font-size: 2rem; white-space: normal; }
+  .textLine p   { font-size: 1.8rem; white-space: normal; }
+  .ojoImg       { width: clamp(120px, 25vw, 200px); }
 }
