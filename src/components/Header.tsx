@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 import { ShoppingCart, Menu, X, Sun, Moon } from 'lucide-react'
 import styles from './Header.module.css'
 
-const WHATSAPP_NUMBER = '573001234567'
+const WHATSAPP_NUMBER = '573133314271'
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hola! Quiero hacer una compra en Monstruo Taller 🛒')}`
 
 export default function Header() {
