@@ -3,16 +3,14 @@
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { ShoppingCart, Menu, X, Sun, Moon } from 'lucide-react'
+import { useCart } from './CartContext'
 import styles from './Header.module.css'
-
-const WHATSAPP_NUMBER = '573133314271'
-const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hola! Quiero hacer una compra en Monstruo Taller 🛒')}`
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [dark, setDark]         = useState(false)
+  const { totalCount } = useCart()
 
-  // Aplica/quita data-theme en <html>
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light')
   }, [dark])
@@ -41,7 +39,6 @@ export default function Header() {
             className={styles.themeToggle}
             onClick={() => setDark(!dark)}
             aria-label={dark ? 'Modo claro' : 'Modo oscuro'}
-            title={dark ? 'Modo claro' : 'Modo oscuro'}
           >
             <span className={`${styles.toggleTrack} ${dark ? styles.toggleDark : ''}`}>
               <span className={styles.toggleThumb}>
@@ -52,10 +49,17 @@ export default function Header() {
 
           <Link href="/tienda" className={styles.btnTienda}>TIENDA</Link>
 
-          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
-            className={styles.cartBtn} aria-label="WhatsApp / Carrito">
+          {/* Carrito → va a /checkout, muestra badge con cantidad */}
+          <Link
+            href="/checkout"
+            className={styles.cartBtn}
+            aria-label={`Carrito (${totalCount} artículos)`}
+          >
             <ShoppingCart size={20} />
-          </a>
+            {totalCount > 0 && (
+              <span className={styles.cartBadge}>{totalCount}</span>
+            )}
+          </Link>
 
           <button className={styles.hamburger} onClick={() => setMenuOpen(!menuOpen)} aria-label="Menú">
             {menuOpen ? <X size={24} /> : <Menu size={24} />}

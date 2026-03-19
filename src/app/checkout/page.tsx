@@ -3,22 +3,19 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import { useCart } from '@/components/CartContext'
+import { formatPrice } from '@/lib/products'
 import styles from './checkout.module.css'
-
-// ── Producto de ejemplo (en producción vendrá del carrito/contexto) ──
-const mockItem = {
-  name: 'Libreta La Facultad',
-  image: '/products/libretas/laFacultad.jpg',
-  price: 40000,
-  qty: 1,
-  size: 'Grande 21x15cm',
-}
 
 const SHIPPING = 10000
 
 export default function CheckoutPage() {
+  const { items } = useCart()
+  const router = useRouter()
+
   const [payMethod, setPayMethod] = useState<'tarjeta' | 'pse' | 'transferencia'>('tarjeta')
   const [form, setForm] = useState({
     pais: '', nombre: '', apellido: '', direccion: '',
@@ -28,15 +25,33 @@ export default function CheckoutPage() {
   })
   const [couponApplied, setCouponApplied] = useState(false)
 
-  const subtotal = mockItem.price * mockItem.qty
-  const discount = couponApplied ? Math.round(subtotal * 0.1) : 0
-  const total    = subtotal - discount + SHIPPING
+  const subtotal  = items.reduce((acc, i) => acc + i.product.priceMax! * i.qty || acc + i.product.priceMin * i.qty, 0)
+  const discount  = couponApplied ? Math.round(subtotal * 0.1) : 0
+  const total     = subtotal - discount + (items.length > 0 ? SHIPPING : 0)
 
   const fmt = (n: number) => `$${n.toLocaleString('es-CO')} COP`
-
-  const set = (key: keyof typeof form) =>
+  const set  = (key: keyof typeof form) =>
     (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
       setForm(f => ({ ...f, [key]: e.target.value }))
+
+  // Si el carrito está vacío, mostrar mensaje
+  if (items.length === 0) {
+    return (
+      <>
+        <Header />
+        <main className={styles.main}>
+          <div className={styles.container}>
+            <h1 className={styles.pageTitle}>CHECK OUT</h1>
+            <div className={styles.emptyCart}>
+              <p>Tu carrito está vacío 🛒</p>
+              <Link href="/tienda" className={styles.backLink}>← Ir a la tienda</Link>
+            </div>
+          </div>
+        </main>
+        <Footer />
+      </>
+    )
+  }
 
   return (
     <>
@@ -48,10 +63,9 @@ export default function CheckoutPage() {
 
           <div className={styles.grid}>
 
-            {/* ─── COLUMNA IZQUIERDA: formulario ─── */}
+            {/* ── IZQUIERDA: formulario ── */}
             <div className={styles.formCol}>
 
-              {/* Datos de envío */}
               <section className={styles.section}>
                 <h2 className={styles.sectionTitle}>Datos de envío</h2>
 
@@ -109,21 +123,14 @@ export default function CheckoutPage() {
                 </div>
               </section>
 
-              {/* Pago */}
               <section className={styles.section}>
                 <h2 className={styles.sectionTitle}>Pago</h2>
 
                 <div className={styles.payMethods}>
                   {(['tarjeta', 'pse', 'transferencia'] as const).map(m => (
                     <label key={m} className={`${styles.payMethod} ${payMethod === m ? styles.payMethodActive : ''}`}>
-                      <input
-                        type="radio"
-                        name="pay"
-                        value={m}
-                        checked={payMethod === m}
-                        onChange={() => setPayMethod(m)}
-                        className={styles.radio}
-                      />
+                      <input type="radio" name="pay" value={m} checked={payMethod === m}
+                        onChange={() => setPayMethod(m)} className={styles.radio} />
                       {m === 'tarjeta' ? 'Tarjeta de Crédito' : m.toUpperCase()}
                     </label>
                   ))}
@@ -153,12 +160,11 @@ export default function CheckoutPage() {
                 )}
 
                 {payMethod === 'pse' && (
-                  <p className={styles.payNote}>Serás redirigido al portal PSE para completar el pago de forma segura.</p>
+                  <p className={styles.payNote}>Serás redirigido al portal PSE para completar el pago.</p>
                 )}
 
                 {payMethod === 'transferencia' && (
                   <div className={styles.transferInfo}>
-                    <p className={styles.payNote}>Realiza tu transferencia a:</p>
                     <p><strong>Banco:</strong> Bancolombia</p>
                     <p><strong>Cuenta:</strong> Ahorros 123-456789-00</p>
                     <p><strong>Titular:</strong> Monstruo Taller SAS</p>
@@ -171,70 +177,66 @@ export default function CheckoutPage() {
 
             </div>
 
-            {/* ─── COLUMNA DERECHA: resumen ─── */}
+            {/* ── DERECHA: resumen ── */}
             <div className={styles.summaryCol}>
               <div className={styles.summaryCard}>
-                <h2 className={styles.sectionTitle}>Tu compra</h2>
+                <h2 className={styles.sectionTitle}>Compra</h2>
 
-                {/* Producto */}
-                <div className={styles.orderItem}>
-                  <div className={styles.orderImgWrap}>
-                    <Image src={mockItem.image} alt={mockItem.name} fill className={styles.orderImg} />
-                  </div>
-                  <div className={styles.orderInfo}>
-                    <p className={styles.orderName}>{mockItem.name}</p>
-                    <p className={styles.orderMeta}>Cantidad: {mockItem.qty}</p>
-                    <p className={styles.orderMeta}>{mockItem.size}</p>
-                  </div>
-                  <p className={styles.orderPrice}>{fmt(mockItem.price)}</p>
+                {/* Lista de ítems reales del carrito */}
+                <div className={styles.itemsList}>
+                  {items.map((item, idx) => (
+                    <div key={idx} className={styles.orderItem}>
+                      <div className={styles.orderImgWrap}>
+                        <Image src={item.product.image} alt={item.product.name} fill className={styles.orderImg} />
+                      </div>
+                      <div className={styles.orderInfo}>
+                        <p className={styles.orderName}>
+                          {item.product.name.charAt(0) + item.product.name.slice(1).toLowerCase()}
+                        </p>
+                        <p className={styles.orderMeta}>Cantidad: {item.qty}</p>
+                        {item.size && <p className={styles.orderMeta}>{item.size}</p>}
+                      </div>
+                      <p className={styles.orderPrice}>
+                        {fmt((item.product.priceMax ?? item.product.priceMin) * item.qty)}
+                      </p>
+                    </div>
+                  ))}
                 </div>
 
                 {/* Cupón */}
                 <div className={styles.couponRow}>
-                  <input
-                    className={`${styles.input} ${styles.couponInput}`}
-                    placeholder="Codigo de descuento"
-                    value={form.coupon}
-                    onChange={set('coupon')}
-                  />
-                  <button
-                    className={styles.couponBtn}
-                    onClick={() => form.coupon.length > 0 && setCouponApplied(true)}
-                  >
+                  <input className={`${styles.input} ${styles.couponInput}`}
+                    placeholder="Codigo de descuento" value={form.coupon} onChange={set('coupon')} />
+                  <button className={styles.couponBtn}
+                    onClick={() => form.coupon.length > 0 && setCouponApplied(true)}>
                     APLICAR
                   </button>
                 </div>
-                {couponApplied && (
-                  <p className={styles.couponSuccess}>✓ Descuento del 10% aplicado</p>
-                )}
+                {couponApplied && <p className={styles.couponSuccess}>✓ Descuento del 10% aplicado</p>}
 
                 {/* Totales */}
                 <div className={styles.totals}>
                   <div className={styles.totalRow}>
-                    <span>Subtotal</span>
-                    <span>{fmt(subtotal)}</span>
+                    <span>Subtotal</span><span>{fmt(subtotal)}</span>
                   </div>
-                  <p className={styles.totalSub}>{mockItem.qty} artículo{mockItem.qty > 1 ? 's' : ''}</p>
+                  <p className={styles.totalSub}>{items.reduce((a, i) => a + i.qty, 0)} artículo(s)</p>
                   {couponApplied && (
                     <div className={`${styles.totalRow} ${styles.discount}`}>
-                      <span>Descuento</span>
-                      <span>-{fmt(discount)}</span>
+                      <span>Descuento</span><span>-{fmt(discount)}</span>
                     </div>
                   )}
                   <div className={styles.totalRow}>
-                    <span>Envío</span>
-                    <span>{fmt(SHIPPING)}</span>
+                    <span>Envío</span><span>{fmt(SHIPPING)}</span>
                   </div>
                   <div className={styles.divider} />
                   <div className={`${styles.totalRow} ${styles.grandTotal}`}>
-                    <span>Total</span>
-                    <span>{fmt(total)}</span>
+                    <span>Total</span><span>{fmt(total)}</span>
                   </div>
                   <p className={styles.taxNote}>Incluye impuestos</p>
                 </div>
               </div>
 
-              <Link href="/tienda" className={styles.backLink}>← Volver a la tienda</Link>
+              <Link href="/tienda" className={styles.backLink}>← Seguir comprando</Link>
             </div>
 
           </div>
