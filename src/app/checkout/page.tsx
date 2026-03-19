@@ -3,38 +3,74 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { useCart } from '@/components/CartContext'
 import { formatPrice } from '@/lib/products'
 import styles from './checkout.module.css'
+import { Trash2, X } from 'lucide-react'
 
+const STORE_EMAIL = 'mun@monstruotaller.com'
 const SHIPPING = 10000
 
 export default function CheckoutPage() {
-  const { items } = useCart()
-  const router = useRouter()
+  const { items, removeItem } = useCart()
 
   const [payMethod, setPayMethod] = useState<'tarjeta' | 'pse' | 'transferencia'>('tarjeta')
   const [form, setForm] = useState({
-    pais: '', nombre: '', apellido: '', direccion: '',
-    casa: '', ciudad: '', estado: '', telefono: '',
-    cardNumber: '', cardExpiry: '', cardCvc: '', cardName: '',
-    coupon: '',
+    nombre: '', apellido: '', pais: 'Colombia',
+    direccion: '', casa: '', ciudad: '',
+    departamento: '', telefono: '', coupon: '',
   })
   const [couponApplied, setCouponApplied] = useState(false)
+  const [sent, setSent] = useState(false)
+  const [showThanks, setShowThanks] = useState(false)
 
-  const subtotal  = items.reduce((acc, i) => acc + i.product.priceMax! * i.qty || acc + i.product.priceMin * i.qty, 0)
-  const discount  = couponApplied ? Math.round(subtotal * 0.1) : 0
-  const total     = subtotal - discount + (items.length > 0 ? SHIPPING : 0)
-
+  const subtotal = items.reduce((acc, i) =>
+    acc + (i.product.priceMax ?? i.product.priceMin) * i.qty, 0)
+  const discount = couponApplied ? Math.round(subtotal * 0.1) : 0
+  const total = subtotal - discount + (items.length > 0 ? SHIPPING : 0)
   const fmt = (n: number) => `$${n.toLocaleString('es-CO')} COP`
-  const set  = (key: keyof typeof form) =>
+  const set = (key: keyof typeof form) =>
     (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
       setForm(f => ({ ...f, [key]: e.target.value }))
 
-  // Si el carrito está vacío, mostrar mensaje
+  const handlePagar = () => {
+    const productosTexto = items.map(i =>
+      `- ${i.product.name}${i.size ? ` (${i.size})` : ''} x${i.qty} = ${fmt((i.product.priceMax ?? i.product.priceMin) * i.qty)}`
+    ).join('\n')
+
+    const cuerpo = `
+NUEVO PEDIDO — Monstruo Taller
+================================
+
+PRODUCTOS:
+${productosTexto}
+
+Subtotal: ${fmt(subtotal)}
+${couponApplied ? `Descuento (10%): -${fmt(discount)}\n` : ''}Envío: ${fmt(SHIPPING)}
+TOTAL: ${fmt(total)}
+
+Método de pago: ${payMethod.toUpperCase()}
+
+--------------------------------
+DATOS DE ENVÍO:
+
+Nombre: ${form.nombre} ${form.apellido}
+País: ${form.pais}
+Dirección: ${form.direccion}${form.casa ? ` / ${form.casa}` : ''}
+Ciudad: ${form.ciudad}
+Departamento: ${form.departamento}
+Teléfono: ${form.telefono}
+================================
+    `.trim()
+
+    const mailtoUrl = `mailto:${STORE_EMAIL}?subject=${encodeURIComponent('Nuevo pedido — Monstruo Taller')}&body=${encodeURIComponent(cuerpo)}`
+    window.location.href = mailtoUrl
+    setSent(true)
+    setShowThanks(true)
+  }
+
   if (items.length === 0) {
     return (
       <>
@@ -58,12 +94,11 @@ export default function CheckoutPage() {
       <Header />
       <main className={styles.main}>
         <div className={styles.container}>
-
           <h1 className={styles.pageTitle}>CHECK OUT</h1>
 
           <div className={styles.grid}>
 
-            {/* ── IZQUIERDA: formulario ── */}
+            {/* ── IZQUIERDA ── */}
             <div className={styles.formCol}>
 
               <section className={styles.section}>
@@ -72,10 +107,10 @@ export default function CheckoutPage() {
                 <div className={styles.fieldFull}>
                   <label className={styles.label}>País / Región*</label>
                   <select className={styles.select} value={form.pais} onChange={set('pais')}>
-                    <option value="">Selecciona tu país</option>
-                    <option value="CO">Colombia</option>
-                    <option value="MX">México</option>
-                    <option value="AR">Argentina</option>
+                    <option value="Colombia">Colombia</option>
+                    <option value="México">México</option>
+                    <option value="Argentina">Argentina</option>
+                    <option value="Otro">Otro</option>
                   </select>
                 </div>
 
@@ -97,7 +132,7 @@ export default function CheckoutPage() {
 
                 <div className={styles.fieldFull}>
                   <label className={styles.label}>Casa, apartamento, etc.</label>
-                  <input className={styles.input} placeholder="Escribe tu dirección" value={form.casa} onChange={set('casa')} />
+                  <input className={styles.input} placeholder="Apto 301, Torre B..." value={form.casa} onChange={set('casa')} />
                 </div>
 
                 <div className={styles.fieldRow}>
@@ -106,83 +141,51 @@ export default function CheckoutPage() {
                     <input className={styles.input} placeholder="Ej: Bogotá" value={form.ciudad} onChange={set('ciudad')} />
                   </div>
                   <div className={styles.field}>
-                    <label className={styles.label}>Estado</label>
-                    <select className={styles.select} value={form.estado} onChange={set('estado')}>
-                      <option value="">Seleccionar Estado</option>
-                      <option>Cundinamarca</option>
-                      <option>Antioquia</option>
-                      <option>Valle del Cauca</option>
-                      <option>Meta</option>
-                    </select>
+                    <label className={styles.label}>Departamento</label>
+                    <input className={styles.input} placeholder="Ej: Cundinamarca" value={form.departamento} onChange={set('departamento')} />
                   </div>
                 </div>
 
                 <div className={styles.fieldFull}>
                   <label className={styles.label}>Teléfono*</label>
-                  <input className={styles.input} type="tel" placeholder="Escribe tu teléfono" value={form.telefono} onChange={set('telefono')} />
+                  <input className={styles.input} type="tel" placeholder="Ej: 300 123 4567" value={form.telefono} onChange={set('telefono')} />
                 </div>
               </section>
 
               <section className={styles.section}>
-                <h2 className={styles.sectionTitle}>Pago</h2>
+                <h2 className={styles.sectionTitle}>Método de pago</h2>
+                <p className={styles.payNote}>
+                  Selecciona cómo quieres pagar. Te contactaremos para coordinar el pago.
+                </p>
 
                 <div className={styles.payMethods}>
                   {(['tarjeta', 'pse', 'transferencia'] as const).map(m => (
                     <label key={m} className={`${styles.payMethod} ${payMethod === m ? styles.payMethodActive : ''}`}>
                       <input type="radio" name="pay" value={m} checked={payMethod === m}
                         onChange={() => setPayMethod(m)} className={styles.radio} />
-                      {m === 'tarjeta' ? 'Tarjeta de Crédito' : m.toUpperCase()}
+                      {m === 'tarjeta' ? 'Tarjeta de Crédito' : m === 'pse' ? 'PSE' : 'Transferencia'}
                     </label>
                   ))}
                 </div>
 
-                {payMethod === 'tarjeta' && (
-                  <div className={styles.cardFields}>
-                    <div className={styles.fieldFull}>
-                      <label className={styles.label}>Número de Tarjeta*</label>
-                      <input className={styles.input} placeholder="Ej: 4567 1234 5678 9012" value={form.cardNumber} onChange={set('cardNumber')} maxLength={19} />
-                    </div>
-                    <div className={styles.fieldRow}>
-                      <div className={styles.field}>
-                        <label className={styles.label}>Fecha de Vencimiento*</label>
-                        <input className={styles.input} placeholder="MM/AA" value={form.cardExpiry} onChange={set('cardExpiry')} maxLength={5} />
-                      </div>
-                      <div className={styles.field}>
-                        <label className={styles.label}>Código de seguridad*</label>
-                        <input className={styles.input} placeholder="···" value={form.cardCvc} onChange={set('cardCvc')} maxLength={4} />
-                      </div>
-                    </div>
-                    <div className={styles.fieldFull}>
-                      <label className={styles.label}>Nombre del titular*</label>
-                      <input className={styles.input} placeholder="Ej: German Camilo Blanco" value={form.cardName} onChange={set('cardName')} />
-                    </div>
-                  </div>
-                )}
+                <button className={styles.payBtn} onClick={handlePagar}>
+                  {sent ? '✓ PEDIDO ENVIADO' : 'ENVIAR PEDIDO'}
+                </button>
 
-                {payMethod === 'pse' && (
-                  <p className={styles.payNote}>Serás redirigido al portal PSE para completar el pago.</p>
+                {sent && (
+                  <p className={styles.sentNote}>
+                    Se abrió tu correo con el resumen del pedido. Envíalo y nos ponemos en contacto contigo pronto 🧡
+                  </p>
                 )}
-
-                {payMethod === 'transferencia' && (
-                  <div className={styles.transferInfo}>
-                    <p><strong>Banco:</strong> Bancolombia</p>
-                    <p><strong>Cuenta:</strong> Ahorros 123-456789-00</p>
-                    <p><strong>Titular:</strong> Monstruo Taller SAS</p>
-                    <p><strong>NIT:</strong> 900.123.456-7</p>
-                  </div>
-                )}
-
-                <button className={styles.payBtn}>PAGAR AHORA</button>
               </section>
 
             </div>
 
-            {/* ── DERECHA: resumen ── */}
+            {/* ── DERECHA ── */}
             <div className={styles.summaryCol}>
               <div className={styles.summaryCard}>
                 <h2 className={styles.sectionTitle}>Compra</h2>
 
-                {/* Lista de ítems reales del carrito */}
                 <div className={styles.itemsList}>
                   {items.map((item, idx) => (
                     <div key={idx} className={styles.orderItem}>
@@ -196,17 +199,26 @@ export default function CheckoutPage() {
                         <p className={styles.orderMeta}>Cantidad: {item.qty}</p>
                         {item.size && <p className={styles.orderMeta}>{item.size}</p>}
                       </div>
-                      <p className={styles.orderPrice}>
-                        {fmt((item.product.priceMax ?? item.product.priceMin) * item.qty)}
-                      </p>
+                      <div className={styles.orderRight}>
+                        <p className={styles.orderPrice}>
+                          {fmt((item.product.priceMax ?? item.product.priceMin) * item.qty)}
+                        </p>
+                        <button
+                          className={styles.removeBtn}
+                          onClick={() => removeItem(item.product.id, item.size)}
+                          aria-label="Eliminar producto"
+                        >
+                          <Trash2 size={14} />
+                        </button>
+                      </div>
                     </div>
                   ))}
                 </div>
 
-                {/* Cupón */}
                 <div className={styles.couponRow}>
                   <input className={`${styles.input} ${styles.couponInput}`}
-                    placeholder="Codigo de descuento" value={form.coupon} onChange={set('coupon')} />
+                    placeholder="Codigo de descuento" value={form.coupon}
+                    onChange={set('coupon')} />
                   <button className={styles.couponBtn}
                     onClick={() => form.coupon.length > 0 && setCouponApplied(true)}>
                     APLICAR
@@ -214,7 +226,6 @@ export default function CheckoutPage() {
                 </div>
                 {couponApplied && <p className={styles.couponSuccess}>✓ Descuento del 10% aplicado</p>}
 
-                {/* Totales */}
                 <div className={styles.totals}>
                   <div className={styles.totalRow}>
                     <span>Subtotal</span><span>{fmt(subtotal)}</span>
@@ -243,6 +254,28 @@ export default function CheckoutPage() {
         </div>
       </main>
       <Footer />
+
+      {showThanks && (
+        <div className={styles.thanksOverlay} onClick={() => setShowThanks(false)}>
+          <div className={styles.thanksModal} onClick={e => e.stopPropagation()}>
+            <button className={styles.thanksClose} onClick={() => setShowThanks(false)}>
+              <X size={20} />
+            </button>
+            <h2 className={styles.thanksTitle}>GRACIAS POR TU COMPRA</h2>
+            <p className={styles.thanksSubtitle}>
+              Estamos preparando tu envío, pronto sabrás de nosotros
+            </p>
+            <div className={styles.thanksImgWrap}>
+              <Image
+                src="/conejos_monstruo.jpg"
+                alt="Gracias"
+                fill
+                className={styles.thanksImg}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </>
   )
 }
