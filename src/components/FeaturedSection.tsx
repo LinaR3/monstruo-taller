@@ -43,7 +43,6 @@ export default function FeaturedSection() {
       <div className={styles.sectionHeader}>
         <div>
           <h2 className={styles.title}>COSITAS NUEVAS</h2>
-          <p className={styles.subtitle}>Conoce nuestros mas recientes lanzamientos</p>
         </div>
         <Link href="/tienda" className={styles.verTodo}>Ver todo →</Link>
       </div>

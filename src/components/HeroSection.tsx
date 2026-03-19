@@ -50,8 +50,8 @@ export default function HeroSection() {
     <section className={styles.hero}>
 
       {/* Textos de fondo absolutos */}
-      <span className={`${styles.bgText} ${styles.bgTall}`}>TALL</span>
-      <span className={`${styles.bgText} ${styles.bger}`}>ER</span>
+      <span className={`${styles.bgText} ${styles.bgTall}`}>TALLER</span>
+      <span className={`${styles.bgText} ${styles.bger}`}>TALLER</span>
 
       {/* MONSTRUO — en el flujo */}
       <h1 className={styles.mainTitle}>MONSTRUO</h1>

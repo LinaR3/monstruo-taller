@@ -13,7 +13,6 @@
   overflow: hidden;
 }
 
-/* ── TALL / ER — mobile y desktop ── */
 .bgText {
   display: block;
   position: absolute;
@@ -27,24 +26,24 @@
 
 /* Mobile: decorativos de fondo, no interfieren con contenido */
 .bgTall {
-  font-size: clamp(3rem, 16vw, 6rem);
-  top: 18%;
+  font-size: clamp(3rem, 18vw, 6.5rem);
+  top: 16%;
   right: 2%;
   opacity: 0;
   z-index: 0;
   color: var(--text-color);
-  mix-blend-mode: multiply;
+  mix-blend-mode: normal;
   animation: slideFromLeft 0.9s cubic-bezier(0.22,1,0.36,1) 0.6s forwards;
 }
 
 .bger {
-  font-size: clamp(3rem, 16vw, 6rem);
-  top: 18%;
+  font-size: clamp(3rem, 18vw, 6.5rem);
+  top: 42%;
   left: 2%;
   opacity: 0;
   z-index: 0;
   color: var(--text-color);
-  mix-blend-mode: multiply;
+  mix-blend-mode: normal;
   animation: slideFromRight 0.9s cubic-bezier(0.22,1,0.36,1) 1.0s forwards;
 }
 
@@ -151,7 +150,6 @@
   color: var(--text-color);
 }
 
-/* Ojo mobile */
 .eyeWrap {
   position: relative;
   z-index: 5;
@@ -260,7 +258,6 @@
     width: 100%;
   }
 
-  /* Bloque inferior desktop: altura fija, todo absoluto */
   .bottomBlock {
     height: 85vh;
     display: block;

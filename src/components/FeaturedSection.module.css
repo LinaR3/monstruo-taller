@@ -34,9 +34,9 @@
   display: inline-block;
   font-family: var(--font-ui);
   font-weight: 700;
-  font-size: 0.85rem;
+  font-size: 1.5rem;
   letter-spacing: 0.5px;
-  padding: 9px 22px;
+  padding: 12px 32px;
   border: 2px solid var(--text-color);
   border-radius: 12px;
   background: var(--card-bg);
