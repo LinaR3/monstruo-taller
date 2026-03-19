@@ -1,4 +1,4 @@
-/* ─── Sección — mismo fondo que la página ─── */
+/* ─── Sección — fondo que la página ─── */
 .section {
   background: transparent;
   padding: 60px 0 70px;
@@ -34,9 +34,9 @@
   display: inline-block;
   font-family: var(--font-ui);
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: 0.85rem;
   letter-spacing: 0.5px;
-  padding: 12px 32px;
+  padding: 10px 26px;
   border: 2px solid var(--text-color);
   border-radius: 12px;
   background: var(--card-bg);
