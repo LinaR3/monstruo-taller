@@ -58,10 +58,13 @@ Pensé este proyecto como una **solución real** para Colombia:
 
 
 
-![Home](<img width="1898" height="924" alt="Hero Pagina Principal" src="https://github.com/user-attachments/assets/0243fcb4-8c31-4bb6-8876-dbbd3702fed4" />)
-![Filtros](<img width="1898" height="924" alt="Tienda" src="https://github.com/user-attachments/assets/2c949e35-03be-44e0-8921-c192ae1ba5ee" />)
-![Producto Checkout](<img width="1898" height="924" alt="Checkout" src="https://github.com/user-attachments/assets/ba8eb7ed-9818-4142-a34b-ba53b46e1fb7" />)
-![Mobile](<img width="429" height="846" alt="mobile" src="https://github.com/user-attachments/assets/5dbac0a1-47c1-4845-801a-e260d485e5d3" />)
+
+=======
+![Home](screenshots/Hero Pagina Principal.png)
+![Filtros](screenshots/Tienda.png)
+![Producto Checkout](<iscreenshots/Checkout.png)
+![Mobile](screenshots/mobile.png)
+
 
 
 ---
@@ -77,4 +80,6 @@ cd monstruo-catalog
 npm install
 
 # Ejecutar en desarrollo
+
 npm run dev
+
