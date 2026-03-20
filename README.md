@@ -60,9 +60,9 @@ Pensé este proyecto como una **solución real** para Colombia:
 
 
 =======
-![Home](screenshots/Hero Pagina Principal.png)
+![Home](screenshots/HeroPP.png)
 ![Filtros](screenshots/Tienda.png)
-![Producto Checkout](<iscreenshots/Checkout.png)
+![Producto Checkout](screenshots/Checkout.png)
 ![Mobile](screenshots/mobile.png)
 
 
