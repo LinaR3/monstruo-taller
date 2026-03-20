@@ -27,7 +27,7 @@ export default function CheckoutPage() {
   const [showThanks, setShowThanks] = useState(false)
 
   const subtotal = items.reduce((acc, i) =>
-    acc + (i.product.priceMax ?? i.product.priceMin) * i.qty, 0)
+    acc + i.price * i.qty, 0)
   const discount = couponApplied ? Math.round(subtotal * 0.1) : 0
   const total = subtotal - discount + (items.length > 0 ? SHIPPING : 0)
   const fmt = (n: number) => `$${n.toLocaleString('es-CO')} COP`
@@ -37,7 +37,7 @@ export default function CheckoutPage() {
 
   const handlePagar = () => {
     const productosTexto = items.map(i =>
-      `- ${i.product.name}${i.size ? ` (${i.size})` : ''} x${i.qty} = ${fmt((i.product.priceMax ?? i.product.priceMin) * i.qty)}`
+      `- ${i.product.name}${i.size ? ` (${i.size})` : ''} x${i.qty} = ${fmt(i.price * i.qty)}`
     ).join('\n')
 
     const cuerpo = `
@@ -201,7 +201,7 @@ Teléfono: ${form.telefono}
                       </div>
                       <div className={styles.orderRight}>
                         <p className={styles.orderPrice}>
-                          {fmt((item.product.priceMax ?? item.product.priceMin) * item.qty)}
+                          {fmt(item.price * item.qty)}
                         </p>
                         <button
                           className={styles.removeBtn}

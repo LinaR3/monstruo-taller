@@ -9,6 +9,16 @@ import { useCart } from './CartContext'
 import { formatPrice } from '@/lib/products'
 import styles from './CartDrawer.module.css'
 
+// Dado un producto y talla seleccionada, devuelve el precio unitario
+function getPriceForSize(product: any, size?: string): number {
+  if (product.category === 'libretas' && product.sizes && size) {
+    const idx = product.sizes.indexOf(size)
+    // índice 0 = pequeña = priceMin, índice 1 = grande = priceMax
+    if (idx === 1 && product.priceMax) return product.priceMax
+  }
+  return product.priceMin
+}
+
 export default function CartDrawer() {
   const { drawerOpen, drawerProduct, closeDrawer, addItem } = useCart()
   const [selectedSize, setSelectedSize] = useState<string | undefined>()
@@ -33,14 +43,18 @@ export default function CartDrawer() {
     return () => { document.body.style.overflow = '' }
   }, [drawerOpen])
 
+  if (!drawerProduct) return null
+
+  // Precio dinámico según talla seleccionada
+  const unitPrice    = getPriceForSize(drawerProduct, selectedSize)
+  const fmt          = (n: number) => `$${n.toLocaleString('es-CO')}`
+  const displayPrice = fmt(unitPrice)
+
   const handleAdd = () => {
-    if (!drawerProduct) return
-    addItem(drawerProduct, selectedSize, qty)
+    addItem(drawerProduct, selectedSize, qty, unitPrice)
     closeDrawer()
     router.push('/checkout')
   }
-
-  if (!drawerProduct) return null
 
   return (
     <>
@@ -75,9 +89,8 @@ export default function CartDrawer() {
               <p className={styles.productName}>
                 {drawerProduct.name.charAt(0) + drawerProduct.name.slice(1).toLowerCase()}
               </p>
-              <p className={styles.productPrice}>
-                {formatPrice(drawerProduct.priceMin, drawerProduct.priceMax)}
-              </p>
+              {/* Precio dinámico */}
+              <p className={styles.productPrice}>{displayPrice} COP</p>
               {drawerProduct.description && (
                 <p className={styles.productDesc}>{drawerProduct.description}</p>
               )}
