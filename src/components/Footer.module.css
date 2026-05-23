@@ -83,3 +83,7 @@
   .logoWrap { grid-column: 1; justify-self: center; }
   .contact { grid-column: 2; align-items: center; }
 }
+
+[data-theme='dark'] .logo {
+  filter: brightness(0) invert(1);
+}

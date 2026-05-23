@@ -27,8 +27,8 @@ export default function Header() {
         {/* Menú */}
         <ul className={`${styles.menu} ${menuOpen ? styles.menuOpen : ''}`}>
           <li><Link href="/tienda?cat=libretas" onClick={() => setMenuOpen(false)}>LIBRETAS</Link></li>
-          <li><Link href="#eventos"             onClick={() => setMenuOpen(false)}>EVENTOS</Link></li>
-          <li><Link href="#universo"            onClick={() => setMenuOpen(false)}>NUESTRO UNIVERSO</Link></li>
+          <li><Link href="/eventos" onClick={() => setMenuOpen(false)}>EVENTOS</Link></li>
+          <li><Link href="/universo"            onClick={() => setMenuOpen(false)}>NUESTRO UNIVERSO</Link></li>
         </ul>
 
         {/* Acciones */}

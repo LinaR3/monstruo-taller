@@ -185,3 +185,7 @@
   .menu.menuOpen { display: flex; }
   .menu a { padding: 12px 20px; width: 100%; text-align: center; }
 }
+
+[data-theme='dark'] .logoImg {
+  filter: brightness(0) invert(1);
+}
