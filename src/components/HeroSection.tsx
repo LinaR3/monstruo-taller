@@ -9,65 +9,82 @@ export default function HeroSection() {
   const textRef2 = useRef<HTMLDivElement>(null)
   const [text1Visible, setText1Visible] = useState(false)
   const [text2Visible, setText2Visible] = useState(false)
-  const [isDark, setIsDark]             = useState(false)
+  const [isDark, setIsDark] = useState(false)
 
   useEffect(() => {
-    const checkTheme = () =>
-      setIsDark(document.documentElement.getAttribute('data-theme') === 'dark')
-    checkTheme()
-    const themeObs = new MutationObserver(checkTheme)
-    themeObs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
+    const root = document.documentElement
+    const checkTheme = () => setIsDark(root.getAttribute('data-theme') === 'dark')
+    const themeObserver = new MutationObserver(checkTheme)
 
-    // Shadow scroll en body
+    checkTheme()
+    themeObserver.observe(root, {
+      attributes: true,
+      attributeFilter: ['data-theme'],
+    })
+
     const featured = document.getElementById('cositas-nuevas')
-    if (featured) {
-      const shadowObs = new IntersectionObserver(
-        ([e]) => document.body.classList.toggle('shadow-scroll', e.isIntersecting),
-        { threshold: 0.05 }
+    const shadowObserver = featured && 'IntersectionObserver' in window
+      ? new IntersectionObserver(
+          ([entry]) => document.body.classList.toggle('shadow-scroll', entry.isIntersecting),
+          { threshold: 0.05 },
+        )
+      : null
+
+    if (featured) shadowObserver?.observe(featured)
+
+    let textObserver: IntersectionObserver | null = null
+    if ('IntersectionObserver' in window) {
+      textObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return
+
+            if (entry.target === textRef1.current) setText1Visible(true)
+            if (entry.target === textRef2.current) setText2Visible(true)
+            textObserver?.unobserve(entry.target)
+          })
+        },
+        { threshold: 0.1 },
       )
-      shadowObs.observe(featured)
     }
 
-    // Animaciones de texto al hacer scroll
-    const textObs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(e => {
-          if (e.target === textRef1.current && e.isIntersecting) setText1Visible(true)
-          if (e.target === textRef2.current && e.isIntersecting) setText2Visible(true)
-        })
-      },
-      { threshold: 0.1 }
-    )
-    if (textRef1.current) textObs.observe(textRef1.current)
-    if (textRef2.current) textObs.observe(textRef2.current)
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (prefersReducedMotion || !textObserver) {
+      setText1Visible(true)
+      setText2Visible(true)
+    } else {
+      if (textRef1.current) textObserver.observe(textRef1.current)
+      if (textRef2.current) textObserver.observe(textRef2.current)
+    }
 
-    return () => { themeObs.disconnect(); textObs.disconnect() }
+    return () => {
+      themeObserver.disconnect()
+      shadowObserver?.disconnect()
+      textObserver?.disconnect()
+      document.body.classList.remove('shadow-scroll')
+    }
   }, [])
 
   const birdSrc = isDark ? '/Aves4black.png' : '/Aves4white.png'
 
   return (
     <section className={styles.hero}>
+      <span className={`${styles.bgText} ${styles.bgTextTop}`} aria-hidden="true">TALLER</span>
+      <span className={`${styles.bgText} ${styles.bgTextBottom}`} aria-hidden="true">TALLER</span>
 
-      {/* Textos de fondo absolutos */}
-      <span className={`${styles.bgText} ${styles.bgTall}`}>TALLER</span>
-      <span className={`${styles.bgText} ${styles.bger}`}>TALLER</span>
-
-      {/* MONSTRUO — en el flujo */}
       <h1 className={styles.mainTitle}>MONSTRUO</h1>
 
-      {/* Corazón */}
       <div className={styles.heroImageContainer}>
-        <img src="/corazonMonstruo.png" alt="Corazón Monstruo" className={styles.heartImg} />
+        <img
+          src="/corazonMonstruo.png"
+          alt="Ilustración de un corazón monstruoso con flores"
+          className={styles.heartImg}
+        />
       </div>
 
-      {/* ── BLOQUE INFERIOR full-width ── */}
       <div className={styles.bottomBlock}>
+        <img src={birdSrc} alt="" className={styles.birdImg} />
 
-        {/* Pájaro — full width, fondo */}
-        <img src={birdSrc} alt="Pájaro" className={styles.birdImg} />
-
-        {/* Texto 1 — top left, anima al scroll */}
         <div
           ref={textRef1}
           className={`${styles.textLine} ${styles.textTop} ${text1Visible ? styles.textVisible : ''}`}
@@ -76,25 +93,20 @@ export default function HeroSection() {
           <h3>PORQUE ES IMAGINARIO...</h3>
         </div>
 
-        {/* Ojo — centro izquierda */}
         <div className={styles.eyeWrap}>
-          <img src="/ojoAbierto.png" alt="Ojo" className={styles.ojoImg} />
+          <img src="/ojoAbierto.png" alt="" className={styles.ojoImg} />
         </div>
 
-        {/* Texto 2 — bottom left, anima al scroll */}
         <div
           ref={textRef2}
           className={`${styles.textLine} ${styles.textBottom} ${text2Visible ? styles.textVisible : ''}`}
-          style={{ transitionDelay: '0.15s' }}
         >
           <p>Y NADIE SABE CÓMO ES</p>
         </div>
 
-        {/* CTA */}
         <div className={styles.ctaWrap}>
           <Link href="/tienda" className={styles.ctaBtn}>VER TIENDA</Link>
         </div>
-
       </div>
     </section>
   )
