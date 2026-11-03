@@ -137,7 +137,7 @@
   top: auto;
   bottom: 5.1%;
   left: 4.62%;
-  width: min(85vw, 585px);
+  width: min(90vw, 585px);
   transition-delay: 0.15s;
 }
 
@@ -157,11 +157,12 @@
 
 .textLine p {
   font-family: var(--font-artistic);
-  font-size: clamp(1.5rem, 6vw, 2.8rem);
+  font-size: clamp(1.2rem, 5vw, 2.8rem);
   font-weight: 400;
   line-height: 1.15;
   text-align: left;
   color: var(--text-color);
+  white-space: nowrap;
 }
 
 .eyeWrap {
@@ -177,6 +178,22 @@
   height: auto;
   opacity: 0.92;
   filter: drop-shadow(0 4px 12px rgba(0,0,0,0.2));
+  animation: eyeBlink 5.2s ease-in-out infinite;
+}
+
+.eyeWrap::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 18%;
+  width: 64%;
+  height: 9%;
+  border-top: 2px solid currentColor;
+  border-radius: 50% 50% 0 0;
+  color: var(--text-color);
+  opacity: 0;
+  pointer-events: none;
+  animation: eyeLid 5.2s ease-in-out infinite;
 }
 
 
@@ -194,6 +211,17 @@
 @keyframes slideFromLeft {
   from { opacity: 0; transform: translateX(-48px); }
   to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes eyeBlink {
+  0%, 54%, 58%, 100% { clip-path: ellipse(75% 75% at 50% 50%); }
+  55.5% { clip-path: ellipse(75% 15% at 50% 50%); }
+  56% { clip-path: ellipse(75% 1.5% at 50% 50%); }
+}
+
+@keyframes eyeLid {
+  0%, 54%, 58%, 100% { opacity: 0; }
+  55.5%, 56% { opacity: 0.9; }
 }
 /* ═══════════════════════════════════════════════
    DESKTOP ≥ 900px — layout dos columnas
@@ -266,7 +294,7 @@
     top: auto;
     bottom: 5.1%;
     left: 4.62%;
-    width: min(40.63vw, 585px);
+    width: min(90vw, 585px);
   }
 
   .textLine h2,
@@ -282,8 +310,8 @@
 
   .textLine p {
     font-size: clamp(2rem, 4.17vw, 60px);
-    line-height: 2;
-    white-space: normal;
+    line-height: 1.15;
+    white-space: nowrap;
   }
 
   .ojoImg { width: min(20.84vw, 300px); }
@@ -336,5 +364,8 @@
     opacity: 1;
     transform: none;
   }
+
+  .eyeWrap::after { animation: none; opacity: 0; }
+  .ojoImg { clip-path: none; }
 
 }
