@@ -16,7 +16,7 @@ const SHIPPING = 10000
 export default function CheckoutPage() {
   const { items, removeItem } = useCart()
 
-  const [payMethod, setPayMethod] = useState<'tarjeta' | 'pse' | 'transferencia'>('tarjeta')
+  const [payMethod, setPayMethod] = useState<'pse' | 'transferencia'>('pse')
   const [form, setForm] = useState({
     nombre: '', apellido: '', pais: 'Colombia',
     direccion: '', casa: '', ciudad: '',
@@ -159,11 +159,11 @@ Teléfono: ${form.telefono}
                 </p>
 
                 <div className={styles.payMethods}>
-                  {(['tarjeta', 'pse', 'transferencia'] as const).map(m => (
+                  {(['pse', 'transferencia'] as const).map(m => (
                     <label key={m} className={`${styles.payMethod} ${payMethod === m ? styles.payMethodActive : ''}`}>
                       <input type="radio" name="pay" value={m} checked={payMethod === m}
                         onChange={() => setPayMethod(m)} className={styles.radio} />
-                      {m === 'tarjeta' ? 'Tarjeta de Crédito' : m === 'pse' ? 'PSE' : 'Transferencia'}
+                      {m === 'pse' ? 'PSE' : 'Transferencia'}
                     </label>
                   ))}
                 </div>
