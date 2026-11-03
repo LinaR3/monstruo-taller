@@ -2,17 +2,57 @@
 
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import Image from 'next/image'
 import styles from './eventos.module.css'
 
 const IG_URL = 'https://www.instagram.com/monstruo.taller/'
 
 const IG_POSTS = [
-  { url: 'https://www.instagram.com/monstruo.taller/p/DYpDQxKFsTX/', label: '✦' },
-  { url: 'https://www.instagram.com/monstruo.taller/reel/DK5Ts3lpiUo/', label: '✦' },
-  { url: 'https://www.instagram.com/monstruo.taller/p/DLpkC3Bg-wd/', label: '✦' },
-  { url: 'https://www.instagram.com/monstruo.taller/p/DLx5EmKpJ-t/', label: '✦' },
-  { url: 'https://www.instagram.com/monstruo.taller/p/DXkfr66EVm5/', label: '✦' },
-  { url: 'https://www.instagram.com/monstruo.taller/reel/DKdWIwigRCv/', label: '✦' },
+  {
+    url: 'https://www.instagram.com/p/DVg7jAlETX5/?img_index=1',
+    image: '/eventos/mural-ballena.jpg',
+    alt: 'Mural de una mujer sobre una ballena rosada, rodeada de olas y árboles',
+  },
+  {
+    url: 'https://www.instagram.com/p/C5_qFVygElD/?img_index=1',
+    image: '/eventos/libretas-en-mesa.jpg',
+    alt: 'Libretas ilustradas exhibidas sobre una mesa',
+  },
+  {
+    url: 'https://www.instagram.com/p/DdlvhOIkflg/?img_index=1',
+    image: '/universo/mural-afrosamurai.jpg',
+    alt: 'Mural de Afrosamurai pintado en una pared',
+  },
+  {
+    url: 'https://www.instagram.com/p/DK5Ts3lpiUo/',
+    image: '/eventos/artista-con-libretas.jpg',
+    alt: 'Artista con el rostro cubierto sostiene una pila de libretas ilustradas',
+  },
+  {
+    url: 'https://www.instagram.com/p/DEnDNrGJNlf/',
+    image: '/eventos/tatuaje-medusa.jpg',
+    alt: 'Tatuaje de una medusa con un planeta en su cabeza',
+  },
+  {
+    url: 'https://www.instagram.com/p/DJHhaV_g0Jf/',
+    image: '/eventos/feria-ilustracion.jpg',
+    alt: 'Artista junto a una mesa llena de libretas e ilustraciones',
+  },
+  {
+    url: 'https://www.instagram.com/p/DbynLyRB2QG/',
+    image: '/eventos/taller-participantes.jpg',
+    alt: 'Grupo de participantes sostiene las libretas que hicieron en un taller',
+  },
+  {
+    url: 'https://www.instagram.com/p/DYpDQxKFsTX/',
+    image: '/eventos/libreta-latido-roja.jpg',
+    alt: 'Libreta roja ilustrada con un corazón y palabras alrededor',
+  },
+  {
+    url: 'https://www.instagram.com/p/DLpkC3Bg-wd/',
+    image: '/eventos/lectora-con-libretas.jpg',
+    alt: 'Persona sostiene dos libretas ilustradas con paisajes y aves',
+  },
 ]
 
 export default function EventosPage() {
@@ -61,15 +101,21 @@ export default function EventosPage() {
 
         <p className={styles.sectionLabel}>Últimas publicaciones</p>
         <div className={styles.postsGrid}>
-          {IG_POSTS.map((post, i) => (
+          {IG_POSTS.map((post) => (
             <a
-              key={i}
+              key={post.url}
               href={post.url}
               target="_blank"
               rel="noopener noreferrer"
               className={styles.postCard}
             >
-              <span className={styles.postPlaceholder}>{post.label}</span>
+              <Image
+                src={post.image}
+                alt={post.alt}
+                fill
+                sizes="(max-width: 768px) 44vw, 30vw"
+                className={styles.postImage}
+              />
             </a>
           ))}
         </div>

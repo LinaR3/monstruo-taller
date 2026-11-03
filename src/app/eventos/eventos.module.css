@@ -123,6 +123,7 @@
 }
 
 .postCard {
+  position: relative;
   aspect-ratio: 1 / 1;
   border: 2px solid var(--text-color);
   border-radius: 14px;
@@ -136,18 +137,25 @@
   cursor: pointer;
 }
 
-.postCard:hover {
+.postCard:hover,
+.postCard:focus-visible {
   transform: translate(-2px, -2px);
   box-shadow: 6px 6px 0 var(--text-color);
 }
 
-.postPlaceholder {
-  font-family: var(--font-artistic);
-  font-size: 2rem;
-  color: var(--text-color);
-  opacity: 0.2;
-  text-align: center;
-  padding: 20px;
+.postCard:focus-visible {
+  outline: 2px solid var(--text-color);
+  outline-offset: 4px;
+}
+
+.postImage {
+  object-fit: cover;
+  transition: transform 350ms ease;
+}
+
+.postCard:hover .postImage,
+.postCard:focus-visible .postImage {
+  transform: scale(1.04);
 }
 
 .sectionLabel {
@@ -166,7 +174,18 @@
 @media (max-width: 768px) {
   .hero { padding: 40px 20px 0; }
   .igSection { padding: 0 20px 60px; }
-  .postsGrid { grid-template-columns: repeat(2, 1fr); padding: 0 20px 60px; }
+  .postsGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 0 20px 60px; }
+  .postCard:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    width: calc(50% - 8px);
+    justify-self: center;
+  }
   .igCard { padding: 28px 24px; }
   .sectionLabel { padding: 0 20px 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .postCard,
+  .postImage {
+    transition: none;
+  }
 }
