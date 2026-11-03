@@ -220,8 +220,9 @@ export default function UniversoPage() {
               />
               <h1 className={styles.title}>UN UNIVERSO QUE SE EXPANDE</h1>
               <p className={styles.introText}>
-                Dibujos que salen del papel y encuentran otras formas: objetos de taller,
-                murales y tatuajes. Tres caminos que nacen de una misma imaginación.
+                En monstruo creemos que la vida merece un espacio propio donde resguardarse,
+                es por eso que creamos pequeños cajoncitos de papel, donde habitan el presente,
+                el pasado y el futuro, te invitamos a conocer lo que aquí se gesta.
               </p>
             </div>
             <nav className={styles.chapterNav} aria-label="Explorar las prácticas artísticas">
@@ -238,8 +239,8 @@ export default function UniversoPage() {
               descriptor="OBJETOS E ILUSTRACIÓN"
               handle="@monstruo.taller"
               profileUrl="https://www.instagram.com/monstruo.taller/"
-              title="Dibujos para llevar contigo."
-              description="Libretas ilustradas y objetos hechos en el taller. Cada pieza empieza con un dibujo y se convierte en algo para usar, guardar o regalar."
+              title="Libretas"
+              description="Cada pieza comienza con una ilustración y se convierte en la mejor compañía para pintar, escribir, dibujar y más."
               message="Hola, vi el universo de Monstruo Taller y quisiera preguntar por sus libretas y productos."
               samples={workshopSamples}
               galleryClassName={styles.gallery + ' ' + styles.workshopGallery}
