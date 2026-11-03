@@ -44,6 +44,37 @@
   filter: drop-shadow(0 8px 24px rgba(0,0,0,0.12));
 }
 
+.revealReady [data-reveal] {
+  opacity: 0;
+}
+
+.revealReady [data-reveal="illustration"][data-revealed="true"] {
+  animation: illustrationReveal 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.revealReady [data-reveal="illustration"][data-revealed="true"] .illustration {
+  animation: gentleFloat 7s ease-in-out 0.9s infinite;
+}
+
+.revealReady [data-reveal="card"][data-revealed="true"] {
+  animation: cardReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.14s both;
+}
+
+@keyframes illustrationReveal {
+  from { opacity: 0; transform: translate3d(-18px, 14px, 0) scale(0.98); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+
+@keyframes cardReveal {
+  from { opacity: 0; transform: translate3d(18px, 16px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes gentleFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
 /* Card derecha */
 .card {
   flex: 1;
@@ -104,6 +135,28 @@
 [data-theme='dark'] .whatsappBtn {
   background: #F9EBDE;
   border-color: #F9EBDE;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section.revealReady [data-reveal="illustration"][data-revealed="true"],
+  .section.revealReady [data-reveal="card"][data-revealed="true"] {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .section.revealReady [data-reveal="illustration"][data-revealed="true"] .illustration {
+    animation: none;
+  }
+
+  .whatsappBtn {
+    transition: none;
+  }
+
+  .whatsappBtn:hover {
+    transform: none;
+    box-shadow: var(--shadow);
+  }
 }
 
 /* Mobile */

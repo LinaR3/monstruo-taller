@@ -1,16 +1,44 @@
+'use client'
+
+import { useEffect, useRef } from 'react'
 import styles from './AsesorSection.module.css'
 
 const WHATSAPP_NUMBER = '573133314271'
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hola! Me gustaría hablar con un asesor de Monstruo Taller 👋')}`
 
 export default function AsesorSection() {
+  const sectionRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const section = sectionRef.current
+    if (!section || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    if (!('IntersectionObserver' in window)) return
+
+    const targets = section.querySelectorAll<HTMLElement>('[data-reveal]')
+    section.classList.add(styles.revealReady)
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return
+          entry.target.setAttribute('data-revealed', 'true')
+          observer.unobserve(entry.target)
+        })
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -4% 0px' },
+    )
+
+    targets.forEach((target) => observer.observe(target))
+    return () => observer.disconnect()
+  }, [])
+
   return (
-    <section className={styles.section}>
+    <section ref={sectionRef} className={styles.section}>
 
       <div className={styles.inner}>
 
         {/* Imagen izquierda */}
-        <div className={styles.imageWrap}>
+        <div className={styles.imageWrap} data-reveal="illustration">
           <img
             src="/taylorCasaDePapel.png"
             alt="Ilustración Monstruo Taller"
@@ -19,7 +47,7 @@ export default function AsesorSection() {
         </div>
 
         {/* Caja derecha */}
-        <div className={styles.card}>
+        <div className={styles.card} data-reveal="card">
           <h2 className={styles.cardTitle}>HABLA CON UN ASESOR</h2>
           <p className={styles.cardDesc}>
             ¿Tienes dudas sobre un producto, pedidos especiales o quieres conocer más de nuestro taller?
