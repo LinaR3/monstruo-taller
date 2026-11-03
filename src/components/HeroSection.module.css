@@ -27,7 +27,7 @@
 /* Mobile: decorativos de fondo, no interfieren con contenido */
 .bgTextTop {
   font-size: clamp(3rem, 18vw, 6.5rem);
-  top: clamp(7rem, 26vw, 12rem);
+  top: clamp(12rem, 34vw, 20rem);
   right: -10%;
   opacity: 1;
   z-index: 0;
@@ -221,7 +221,7 @@
 
   .bgTextTop {
     font-size: clamp(6rem, 20.84vw, 300px);
-    top: 0;
+    top: clamp(24rem, 25vw, 32rem);
     right: -7%;
     bottom: auto;
     mix-blend-mode: normal;
