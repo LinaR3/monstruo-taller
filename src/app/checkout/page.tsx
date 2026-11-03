@@ -6,11 +6,10 @@ import Link from 'next/link'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { useCart } from '@/components/CartContext'
-import { formatPrice } from '@/lib/products'
 import styles from './checkout.module.css'
-import { Trash2, X } from 'lucide-react'
+import { Trash2 } from 'lucide-react'
 
-const STORE_EMAIL = 'mun@monstruotaller.com'
+const WHATSAPP_NUMBER = '573133314271'
 const SHIPPING = 10000
 
 export default function CheckoutPage() {
@@ -23,8 +22,6 @@ export default function CheckoutPage() {
     departamento: '', telefono: '', coupon: '',
   })
   const [couponApplied, setCouponApplied] = useState(false)
-  const [sent, setSent] = useState(false)
-  const [showThanks, setShowThanks] = useState(false)
 
   const subtotal = items.reduce((acc, i) =>
     acc + i.price * i.qty, 0)
@@ -35,40 +32,35 @@ export default function CheckoutPage() {
     (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
       setForm(f => ({ ...f, [key]: e.target.value }))
 
-  const handlePagar = () => {
+  const handlePagar = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
     const productosTexto = items.map(i =>
-      `- ${i.product.name}${i.size ? ` (${i.size})` : ''} x${i.qty} = ${fmt(i.price * i.qty)}`
+      `• ${i.product.name.charAt(0) + i.product.name.slice(1).toLowerCase()}${i.size ? ` — ${i.size}` : ''} | Cantidad: ${i.qty} | Precio: ${fmt(i.price)} c/u | Total: ${fmt(i.price * i.qty)}`
     ).join('\n')
 
-    const cuerpo = `
-NUEVO PEDIDO — Monstruo Taller
-================================
+    const mensaje = `Hola, quiero hacer un pedido en Monstruo Taller 🧡
 
-PRODUCTOS:
+*DATOS DE ENVÍO*
+Nombre: ${[form.nombre, form.apellido].filter(Boolean).join(' ')}
+País / región: ${form.pais}
+Dirección: ${form.direccion}${form.casa ? `, ${form.casa}` : ''}
+Ciudad: ${form.ciudad}
+Departamento: ${form.departamento || 'No especificado'}
+Teléfono: ${form.telefono}
+
+*PRODUCTOS*
 ${productosTexto}
 
 Subtotal: ${fmt(subtotal)}
 ${couponApplied ? `Descuento (10%): -${fmt(discount)}\n` : ''}Envío: ${fmt(SHIPPING)}
-TOTAL: ${fmt(total)}
+*TOTAL: ${fmt(total)}*
+Método de pago preferido: ${payMethod === 'pse' ? 'PSE' : 'Transferencia'}
 
-Método de pago: ${payMethod.toUpperCase()}
+Por favor, confírmame el pedido y los pasos para completar el pago.`
 
---------------------------------
-DATOS DE ENVÍO:
-
-Nombre: ${form.nombre} ${form.apellido}
-País: ${form.pais}
-Dirección: ${form.direccion}${form.casa ? ` / ${form.casa}` : ''}
-Ciudad: ${form.ciudad}
-Departamento: ${form.departamento}
-Teléfono: ${form.telefono}
-================================
-    `.trim()
-
-    const mailtoUrl = `mailto:${STORE_EMAIL}?subject=${encodeURIComponent('Nuevo pedido — Monstruo Taller')}&body=${encodeURIComponent(cuerpo)}`
-    window.location.href = mailtoUrl
-    setSent(true)
-    setShowThanks(true)
+    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer')
   }
 
   if (items.length === 0) {
@@ -99,7 +91,7 @@ Teléfono: ${form.telefono}
           <div className={styles.grid}>
 
             {/* ── IZQUIERDA ── */}
-            <div className={styles.formCol}>
+            <form className={styles.formCol} onSubmit={handlePagar}>
 
               <section className={styles.section}>
                 <h2 className={styles.sectionTitle}>Datos de envío</h2>
@@ -117,45 +109,45 @@ Teléfono: ${form.telefono}
                 <div className={styles.fieldRow}>
                   <div className={styles.field}>
                     <label className={styles.label}>Nombre*</label>
-                    <input className={styles.input} placeholder="Camilo" value={form.nombre} onChange={set('nombre')} />
+                    <input className={styles.input} name="nombre" autoComplete="given-name" placeholder="Camilo" value={form.nombre} onChange={set('nombre')} required />
                   </div>
                   <div className={styles.field}>
-                    <label className={styles.label}>Apellido</label>
-                    <input className={styles.input} placeholder="Ruiz" value={form.apellido} onChange={set('apellido')} />
+                  <label className={styles.label}>Apellido*</label>
+                    <input className={styles.input} name="apellido" autoComplete="family-name" placeholder="Ruiz" value={form.apellido} onChange={set('apellido')} required />
                   </div>
                 </div>
 
                 <div className={styles.fieldFull}>
                   <label className={styles.label}>Dirección*</label>
-                  <input className={styles.input} placeholder="Calle 56 #78-09" value={form.direccion} onChange={set('direccion')} />
+                  <input className={styles.input} name="direccion" autoComplete="street-address" placeholder="Calle 56 #78-09" value={form.direccion} onChange={set('direccion')} required />
                 </div>
 
                 <div className={styles.fieldFull}>
-                  <label className={styles.label}>Casa, apartamento, etc.</label>
-                  <input className={styles.input} placeholder="Apto 301, Torre B..." value={form.casa} onChange={set('casa')} />
+                  <label className={styles.label}>Casa, apartamento, etc. (opcional)</label>
+                  <input className={styles.input} name="casa" autoComplete="address-line2" placeholder="Apto 301, Torre B..." value={form.casa} onChange={set('casa')} />
                 </div>
 
                 <div className={styles.fieldRow}>
                   <div className={styles.field}>
                     <label className={styles.label}>Ciudad*</label>
-                    <input className={styles.input} placeholder="Ej: Bogotá" value={form.ciudad} onChange={set('ciudad')} />
+                    <input className={styles.input} name="ciudad" autoComplete="address-level2" placeholder="Ej: Bogotá" value={form.ciudad} onChange={set('ciudad')} required />
                   </div>
                   <div className={styles.field}>
-                    <label className={styles.label}>Departamento</label>
-                    <input className={styles.input} placeholder="Ej: Cundinamarca" value={form.departamento} onChange={set('departamento')} />
+                    <label className={styles.label}>Departamento*</label>
+                    <input className={styles.input} name="departamento" autoComplete="address-level1" placeholder="Ej: Cundinamarca" value={form.departamento} onChange={set('departamento')} required />
                   </div>
                 </div>
 
                 <div className={styles.fieldFull}>
                   <label className={styles.label}>Teléfono*</label>
-                  <input className={styles.input} type="tel" placeholder="Ej: 300 123 4567" value={form.telefono} onChange={set('telefono')} />
+                  <input className={styles.input} name="telefono" autoComplete="tel" type="tel" placeholder="Ej: 300 123 4567" value={form.telefono} onChange={set('telefono')} required />
                 </div>
               </section>
 
               <section className={styles.section}>
                 <h2 className={styles.sectionTitle}>Método de pago</h2>
                 <p className={styles.payNote}>
-                  Selecciona cómo quieres pagar. Te contactaremos para coordinar el pago.
+                  Selecciona cómo quieres pagar. El artista coordinará el pago contigo por WhatsApp.
                 </p>
 
                 <div className={styles.payMethods}>
@@ -168,18 +160,16 @@ Teléfono: ${form.telefono}
                   ))}
                 </div>
 
-                <button className={styles.payBtn} onClick={handlePagar}>
-                  {sent ? '✓ PEDIDO ENVIADO' : 'ENVIAR PEDIDO'}
+                <button className={styles.payBtn} type="submit">
+                  CONTINUAR POR WHATSAPP
                 </button>
 
-                {sent && (
-                  <p className={styles.sentNote}>
-                    Se abrió tu correo con el resumen del pedido. Envíalo y nos ponemos en contacto contigo pronto 🧡
-                  </p>
-                )}
+                <p className={styles.whatsAppNote}>
+                  Se abrirá WhatsApp con tu pedido listo. Revísalo y pulsa Enviar; el pedido queda confirmado cuando Monstruo Taller te responda.
+                </p>
               </section>
 
-            </div>
+            </form>
 
             {/* ── DERECHA ── */}
             <div className={styles.summaryCol}>
@@ -255,27 +245,6 @@ Teléfono: ${form.telefono}
       </main>
       <Footer />
 
-      {showThanks && (
-        <div className={styles.thanksOverlay} onClick={() => setShowThanks(false)}>
-          <div className={styles.thanksModal} onClick={e => e.stopPropagation()}>
-            <button className={styles.thanksClose} onClick={() => setShowThanks(false)}>
-              <X size={20} />
-            </button>
-            <h2 className={styles.thanksTitle}>GRACIAS POR TU COMPRA</h2>
-            <p className={styles.thanksSubtitle}>
-              Estamos preparando tu envío, pronto sabrás de nosotros
-            </p>
-            <div className={styles.thanksImgWrap}>
-              <Image
-                src="/conejos_monstruo.jpg"
-                alt="Gracias"
-                fill
-                className={styles.thanksImg}
-              />
-            </div>
-          </div>
-        </div>
-      )}
     </>
   )
 }

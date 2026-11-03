@@ -153,30 +153,11 @@
     accent-color: var(--bg-color);
 }
 
-.cardFields {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-}
-
 .payNote {
     font-family: var(--font-ui);
     font-size: 0.85rem;
     color: var(--text-color);
     opacity: 0.7;
-}
-
-.transferInfo {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    font-family: var(--font-ui);
-    font-size: 0.85rem;
-    color: var(--text-color);
-    background: var(--bg-color);
-    border: 1.5px solid var(--text-color);
-    border-radius: 8px;
-    padding: 14px;
 }
 
 /* ── Botón pagar ── */
@@ -190,7 +171,7 @@
     font-family: var(--font-ui);
     font-weight: 900;
     font-size: 0.95rem;
-    letter-spacing: 1.5px;
+    letter-spacing: 0.8px;
     cursor: pointer;
     box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.25);
     transition: transform 0.1s, box-shadow 0.1s;
@@ -383,7 +364,7 @@
 }
 
 
-.sentNote {
+.whatsAppNote {
     font-family: var(--font-ui);
     font-size: 0.82rem;
     line-height: 1.5;
@@ -432,81 +413,4 @@
 .removeBtn:hover {
     opacity: 1;
     background: #fee2e2;
-}
-
-.thanksOverlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    animation: fadeIn 0.2s ease;
-}
-
-.thanksModal {
-  background: #ffffff;
-  border:  2px solid #000;
-  border-radius: 16px;
-  box-shadow: 8px 8px 0 var(--text-color);
-  width: 100%;
-  max-width: 420px;
-  padding: 36px 32px 0; 
-  position: relative;
-  text-align: center;
-  overflow: hidden;
-  animation: slideUp 0.3s cubic-bezier(0.22,1,0.36,1);
-}
-
-.thanksClose {
-    position: absolute;
-    top: 14px;
-    right: 12px;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    border: 1.5px solid var(--text-color);
-    background: var(--card-bg);
-    color: var(--text-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 2px 2px 0 var(--text-color);
-    transition: transform 0.1s, box-shadow 0.1s;
-}
-
-.thanksClose:hover {
-    transform: translate(1px, 1px);
-    box-shadow: none;
-}
-
-.thanksTitle {
-    font-family: var(--font-artistic);
-    font-size: clamp(1.8rem, 5vw, 2.8rem);
-    font-weight: 400;
-    color: var(--text-color);
-    margin-bottom: 12px;
-}
-
-.thanksSubtitle {
-    font-family: var(--font-ui);
-    font-size: 0.95rem;
-    color: var(--text-color);
-    opacity: 0.7;
-    margin-bottom: 24px;
-}
-
-.thanksImgWrap {
-    position: relative;
-    width: 100%;
-    height: 380px;
-    aspect-ratio: 1 / 1;
-}
-
-.thanksImg {
-    object-fit: contain;
-    object-position: center bottom;
 }
