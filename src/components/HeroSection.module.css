@@ -110,7 +110,6 @@
   object-position: right center;
   pointer-events: none;
   opacity: 0.35;
-  animation: floatBird 7s ease-in-out 1.5s infinite;
   z-index: 0;
 }
 
@@ -213,10 +212,6 @@
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: translateY(0); }
-}
-@keyframes floatBird {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50%      { transform: translateY(-6px) rotate(0.75deg); }
 }
 @keyframes blink {
   0%, 87%, 93%, 100% { transform: scaleY(1); }
@@ -355,7 +350,6 @@
   .bgTextBottom,
   .mainTitle,
   .heroImageContainer,
-  .birdImg,
   .textLine,
   .ojoImg,
   .ctaWrap {
