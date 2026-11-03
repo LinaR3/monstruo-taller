@@ -102,9 +102,10 @@
 .birdImg {
   position: absolute;
   top: 0;
-  right: -5%;
+  right: 0;
   width: 80%;
-  height: 100%;
+  height: auto;
+  max-height: 100%;
   object-fit: contain;
   object-position: right center;
   pointer-events: none;
@@ -264,8 +265,9 @@
     position: absolute;
     top: 0;
     right: 0;
-    width: 60%;
-    height: 100%;
+    width: min(79.32vw, 1143px);
+    height: auto;
+    max-height: 100%;
     object-fit: contain;
     object-position: right top;
     opacity: 1;
