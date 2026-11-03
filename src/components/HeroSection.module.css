@@ -28,7 +28,8 @@
 .bgTextTop {
   font-size: clamp(3rem, 18vw, 6.5rem);
   top: clamp(12rem, 34vw, 20rem);
-  right: -10%;
+  right: 0;
+  left: auto;
   opacity: 1;
   z-index: 0;
   color: var(--text-color);
@@ -39,7 +40,7 @@
 .bgTextBottom {
   font-size: clamp(3rem, 18vw, 6.5rem);
   top: clamp(22rem, 72vw, 32rem);
-  left: -10%;
+  left: 0;
   opacity: 1;
   z-index: 0;
   color: var(--text-color);
@@ -66,7 +67,7 @@
 
 /* ── CORAZÓN ── */
 .heroImageContainer {
-  margin-top: -18vw;
+  margin-top: clamp(-260px, -26vw, -105px);
   position: relative;
   z-index: 3;
   width: min(92.4vw, 1155px);
@@ -227,6 +228,7 @@
     font-size: clamp(6rem, 20.84vw, 300px);
     top: clamp(24rem, 25vw, 32rem);
     right: -7%;
+    left: auto;
     bottom: auto;
     mix-blend-mode: normal;
   }
