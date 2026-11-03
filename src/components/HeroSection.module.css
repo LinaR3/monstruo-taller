@@ -354,7 +354,12 @@
 
 @media (prefers-reduced-motion: reduce) {
   .bgTextTop,
-  .bgTextBottom,
+  .bgTextBottom {
+    animation: none;
+    transition: none;
+    opacity: 1;
+  }
+
   .mainTitle,
   .heroImageContainer,
   .textLine,
