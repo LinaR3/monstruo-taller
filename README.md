@@ -1,85 +1,59 @@
-# 🦍 Monstruo Catalog
+# Monstruo Taller
 
-**Catálogo Visual Interactivo para PYMEs Colombianas y Artistas Independientes**
+Sitio web visual de Monstruo Taller, un proyecto artístico independiente. Reúne sus libretas y otros productos, una bitácora de eventos y las distintas prácticas que nacen de su universo creativo: ilustración, murales y tatuajes.
 
-Una página "monstruo" moderna, rápida y 100% visual creada con React para que pequeñas empresas y artistas puedan mostrar sus productos de forma impactante sin necesidad de programadores.
+El sitio permite armar un pedido y coordinarlo directamente por WhatsApp. No procesa pagos en línea ni confirma compras automáticamente.
 
----
+## Secciones
 
-## ✨ ¿Qué es Monstruo?
+- **Inicio (`/`)**: presentación ilustrada, productos destacados y contacto con el taller.
+- **Tienda (`/tienda`)**: catálogo con filtros por categoría, selección de productos y tallas, y carrito.
+- **Eventos (`/eventos`)**: galería visual enlazada a publicaciones de Instagram.
+- **Nuestro universo (`/universo`)**: portafolio de Monstruo Taller, MuN Ilustra y MuN Tatux.
+- **Checkout (`/checkout`)**: datos de envío, resumen de la compra y preparación del pedido para WhatsApp.
 
-Monstruo es un **catálogo digital mobile-first** pensado especialmente para:
-- Pequeñas PYMEs colombianas
-- Artistas independientes
-- Emprendedores que necesitan algo **bonito, rápido y profesional**
+## Cómo funciona el pedido
 
-En lugar de una tienda aburrida, creé una experiencia visual potente donde el producto brilla por sí solo.
+1. La persona agrega productos al carrito y completa sus datos de envío.
+2. Elige PSE o transferencia como método de pago preferido.
+3. El checkout abre WhatsApp con un resumen del pedido, listo para revisar y enviar.
+4. Monstruo Taller revisa el mensaje, confirma los detalles y coordina el pago por ese medio.
 
----
+El envío aparece como un valor aproximado de **$10.000 COP**. El monto final se confirma por WhatsApp según la ubicación. La página no cobra ni envía el mensaje automáticamente: la persona debe pulsar **Enviar** en WhatsApp.
 
-## 🚀 Características Principales
+## Tecnologías
 
-- ✅ Carga dinámica de productos desde JSON (fácil de actualizar)
-- ✅ Filtros por categoría, precio y búsqueda en tiempo real
-- ✅ Simulación de carrito de compras
-- ✅ Animaciones suaves y efectos hover premium
-- ✅ Diseño totalmente responsivo (quedó espectacular en móvil)
-- ✅ Grid moderno + tipografía elegante (pensado para artistas)
-- ✅ Optimizado para velocidad y SEO básico
-- ✅ Interfaz limpia y emocional (el foco visual que los artistas necesitan)
+- Next.js con App Router
+- React y TypeScript
+- CSS Modules y CSS global
+- Lucide React para iconos
 
----
+## Ejecutar localmente
 
-## 🛠 Tecnologías Utilizadas
-
-- **React** + Vite
-- **JavaScript (ES6+)**
-- **CSS3** (animaciones, Grid, Flexbox, variables)
-- **JSON** como base de datos (fácil de editar)
-- Estado con `useState` + `useEffect`
-- Componentes reutilizables y lógica de negocio avanzada
-
----
-
-## 🎨 Estrategia que diseñé (para PYMEs)
-
-Pensé este proyecto como una **solución real** para Colombia:
-- Barato y fácil de mantener (sin backend costoso)
-- Enfocado 100% en lo visual (porque los artistas y artesanos viven de la estética)
-- Mobile-first (más del 70% de las ventas en Colombia vienen de celular)
-- Fácil de personalizar: cualquier PYME solo cambia el JSON y ya tiene su catálogo listo
-
----
-
-## 📸 Capturas de Pantalla
-
-
-
-
-
-
-
-=======
-![Home](screenshots/HeroPP.png)
-![Filtros](screenshots/Tienda.png)
-![Producto Checkout](screenshots/Checkout.png)
-![Mobile](screenshots/mobile.png)
-
-
-
----
-
-## ▶️ Cómo ejecutarlo localmente
+Necesitas Node.js y npm instalados.
 
 ```bash
-# Clonar el repositorio
-git clone https://github.com/LinaR3/monstruo-catalog.git
-cd monstruo-catalog
-
-# Instalar dependencias
-npm install
-
-# Ejecutar en desarrollo
-
+git clone https://github.com/LinaR3/monstruo-taller.git
+cd monstruo-taller
+npm ci
 npm run dev
+```
 
+Abre [http://localhost:3000](http://localhost:3000) en el navegador.
+
+## Comandos disponibles
+
+| Comando | Uso |
+| --- | --- |
+| `npm run dev` | Inicia el servidor de desarrollo. |
+| `npm run build` | Genera la versión de producción. |
+| `npm start` | Sirve la versión de producción después de compilarla. |
+| `npm run lint` | Ejecuta ESLint. |
+
+## Actualizar el contenido
+
+- **Productos, precios, categorías y tallas:** `src/lib/products.ts`.
+- **Fotos de productos:** `public/products/`.
+- **Publicaciones de eventos:** `src/app/eventos/page.tsx`; sus imágenes locales están en `public/eventos/` y `public/universo/`.
+- **Textos y galerías de los perfiles artísticos:** `src/app/universo/page.tsx`.
+- **Estilos:** los archivos `*.module.css` junto a cada página o componente, y `src/app/globals.css` para estilos globales.
