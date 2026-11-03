@@ -27,7 +27,7 @@
 /* Mobile: decorativos de fondo, no interfieren con contenido */
 .bgTextTop {
   font-size: clamp(3rem, 18vw, 6.5rem);
-  top: 18%;
+  top: clamp(7rem, 26vw, 12rem);
   right: -10%;
   opacity: 1;
   z-index: 0;
@@ -38,7 +38,7 @@
 
 .bgTextBottom {
   font-size: clamp(3rem, 18vw, 6.5rem);
-  top: 40%;
+  top: clamp(22rem, 72vw, 32rem);
   left: -10%;
   opacity: 1;
   z-index: 0;
@@ -69,7 +69,7 @@
   margin-top: -18vw;
   position: relative;
   z-index: 3;
-  width: min(88vw, 1100px);
+  width: min(92.4vw, 1155px);
   max-width: 100%;
   pointer-events: none;
   opacity: 0;
@@ -220,7 +220,7 @@
   .hero { padding-top: 30px; }
 
   .bgTextTop {
-    font-size: clamp(18rem, 20.84vw, 300px);
+    font-size: clamp(6rem, 20.84vw, 300px);
     top: 0;
     right: -7%;
     bottom: auto;
@@ -228,8 +228,8 @@
   }
 
   .bgTextBottom {
-    font-size: clamp(18rem, 20.84vw, 300px);
-    top: 50%;
+    font-size: clamp(6rem, 20.84vw, 300px);
+    top: clamp(30rem, 45vw, 52rem);
     bottom: auto;
     left: -7%;
     mix-blend-mode: normal;
@@ -238,7 +238,7 @@
 
   .heroImageContainer {
     margin-top: calc(-18vw - 65px);
-    width: min(88vw, 1127px);
+    width: min(92.4vw, 1183px);
     max-width: none;
   }
 
