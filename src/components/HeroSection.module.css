@@ -231,17 +231,17 @@
 
   .bgTextTop {
     font-size: clamp(18rem, 20.84vw, 300px);
-    top: 15%;
-    right: 1%;
+    top: 0;
+    right: 0;
     bottom: auto;
     mix-blend-mode: normal;
   }
 
   .bgTextBottom {
     font-size: clamp(18rem, 20.84vw, 300px);
-    top: 50rem;
+    top: 50%;
     bottom: auto;
-    left: 15%;
+    left: 0;
     mix-blend-mode: normal;
     transform: rotate(180deg);
   }
