@@ -142,6 +142,10 @@
   color: var(--text-color);
 }
 
+.textTop h3 {
+  font-size: clamp(1.5rem, 5.8vw, 2.7rem);
+}
+
 .textLine p {
   font-family: var(--font-artistic);
   font-size: clamp(1.5rem, 6vw, 2.8rem);
@@ -293,6 +297,10 @@
     font-size: clamp(2.2rem, 5.56vw, 80px);
     line-height: 1.5;
     white-space: normal;
+  }
+
+  .textTop h3 {
+    font-size: clamp(2rem, 4.86vw, 70px);
   }
 
   .textLine p {
