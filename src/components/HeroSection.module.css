@@ -230,7 +230,7 @@
   .hero { padding-top: 140px; }
 
   .bgTextTop {
-    font-size: 18rem;
+    font-size: clamp(18rem, 20.84vw, 300px);
     top: 15%;
     right: 1%;
     bottom: auto;
@@ -238,11 +238,12 @@
   }
 
   .bgTextBottom {
-    font-size: 18rem;
+    font-size: clamp(18rem, 20.84vw, 300px);
     top: 50rem;
     bottom: auto;
     left: 15%;
     mix-blend-mode: normal;
+    transform: rotate(180deg);
   }
 
   .heroImageContainer {
