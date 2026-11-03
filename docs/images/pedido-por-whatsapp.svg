@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="610" viewBox="0 0 1280 610" role="img" aria-labelledby="title desc">
+  <title id="title">Así funciona el pedido por WhatsApp</title>
+  <desc id="desc">Cuatro pasos: elegir productos, completar los datos de envío, revisar el resumen y enviar el mensaje por WhatsApp para coordinar el pago.</desc>
+  <rect width="1280" height="610" rx="30" fill="#F9EBDE"/>
+  <circle cx="1130" cy="80" r="130" fill="#E8D5CC" opacity=".6"/>
+  <text x="64" y="76" fill="#72594B" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" letter-spacing="3">UNA COMPRA DIRECTA, SIN PASARELA</text>
+  <text x="64" y="148" fill="#1A1008" font-family="Arial, Helvetica, sans-serif" font-size="46" font-weight="800">El pedido continúa en WhatsApp</text>
+  <text x="64" y="188" fill="#5D5048" font-family="Arial, Helvetica, sans-serif" font-size="20">La web prepara el mensaje; la persona lo revisa y decide cuándo enviarlo.</text>
+
+  <path d="M205 325H1075" stroke="#CBB5A7" stroke-width="4" stroke-dasharray="9 12"/>
+
+  <g transform="translate(64 242)">
+    <rect width="266" height="236" rx="20" fill="#FFFDFC" stroke="#1A1008" stroke-width="2"/>
+    <circle cx="44" cy="44" r="23" fill="#1A1008"/>
+    <text x="44" y="51" text-anchor="middle" fill="#F9EBDE" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="800">01</text>
+    <text x="28" y="104" fill="#1A1008" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="800">Elige productos</text>
+    <text x="28" y="143" fill="#5D5048" font-family="Arial, Helvetica, sans-serif" font-size="17">
+      <tspan x="28" dy="0">Selecciona artículo,</tspan>
+      <tspan x="28" dy="25">talla y cantidad.</tspan>
+    </text>
+    <circle cx="250" cy="83" r="6" fill="#A35746"/>
+  </g>
+
+  <g transform="translate(366 242)">
+    <rect width="266" height="236" rx="20" fill="#FFFDFC" stroke="#1A1008" stroke-width="2"/>
+    <circle cx="44" cy="44" r="23" fill="#1A1008"/>
+    <text x="44" y="51" text-anchor="middle" fill="#F9EBDE" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="800">02</text>
+    <text x="28" y="104" fill="#1A1008" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="800">Completa envío</text>
+    <text x="28" y="143" fill="#5D5048" font-family="Arial, Helvetica, sans-serif" font-size="17">
+      <tspan x="28" dy="0">Agrega nombre,</tspan>
+      <tspan x="28" dy="25">dirección y teléfono.</tspan>
+    </text>
+    <circle cx="250" cy="83" r="6" fill="#4E705A"/>
+  </g>
+
+  <g transform="translate(668 242)">
+    <rect width="266" height="236" rx="20" fill="#FFFDFC" stroke="#1A1008" stroke-width="2"/>
+    <circle cx="44" cy="44" r="23" fill="#1A1008"/>
+    <text x="44" y="51" text-anchor="middle" fill="#F9EBDE" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="800">03</text>
+    <text x="28" y="104" fill="#1A1008" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="800">Revisa el total</text>
+    <text x="28" y="143" fill="#5D5048" font-family="Arial, Helvetica, sans-serif" font-size="17">
+      <tspan x="28" dy="0">Incluye productos,</tspan>
+      <tspan x="28" dy="25">pago preferido y envío</tspan>
+      <tspan x="28" dy="25">aproximado.</tspan>
+    </text>
+    <circle cx="250" cy="83" r="6" fill="#766080"/>
+  </g>
+
+  <g transform="translate(970 242)">
+    <rect width="246" height="236" rx="20" fill="#E2E8D8" stroke="#1A1008" stroke-width="2"/>
+    <circle cx="44" cy="44" r="23" fill="#1A1008"/>
+    <text x="44" y="51" text-anchor="middle" fill="#F9EBDE" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="800">04</text>
+    <text x="28" y="104" fill="#1A1008" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="800">Envía por WhatsApp</text>
+    <text x="28" y="143" fill="#405044" font-family="Arial, Helvetica, sans-serif" font-size="17">
+      <tspan x="28" dy="0">Revisa el mensaje y</tspan>
+      <tspan x="28" dy="25">pulsa Enviar. El taller</tspan>
+      <tspan x="28" dy="25">te responde por allí.</tspan>
+    </text>
+    <circle cx="230" cy="83" r="6" fill="#4E705A"/>
+  </g>
+
+  <text x="64" y="540" fill="#1A1008" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700">PSE o transferencia se coordinan por chat.</text>
+  <text x="64" y="568" fill="#72594B" font-family="Arial, Helvetica, sans-serif" font-size="16">El envío es aproximado; el valor final se confirma según la ubicación. La página no cobra ni envía el mensaje por sí sola.</text>
+</svg>

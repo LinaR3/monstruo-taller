@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="700" viewBox="0 0 1280 700" role="img" aria-labelledby="title desc">
+  <title id="title">Lo que construí para Monstruo Taller</title>
+  <desc id="desc">Tres logros del sitio: identidad visual responsiva, catálogo con carrito y portafolio para tres prácticas artísticas.</desc>
+  <rect width="1280" height="700" rx="30" fill="#F9EBDE"/>
+  <circle cx="1185" cy="82" r="108" fill="#F1D8CB" opacity=".75"/>
+  <circle cx="1200" cy="70" r="60" fill="#E9C6B6" opacity=".5"/>
+  <text x="64" y="78" fill="#72594B" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" letter-spacing="3">MONSTRUO TALLER · PROYECTO WEB</text>
+  <text x="64" y="151" fill="#1A1008" font-family="Arial, Helvetica, sans-serif" font-size="48" font-weight="800">Un universo visual para el artista</text>
+  <text x="64" y="190" fill="#5D5048" font-family="Arial, Helvetica, sans-serif" font-size="21">Lo que construí para mostrar su trabajo y acercar sus productos a las personas.</text>
+
+  <g transform="translate(64 250)">
+    <rect width="360" height="350" rx="22" fill="#FFFDFC" stroke="#1A1008" stroke-width="2"/>
+    <rect x="8" y="8" width="360" height="350" rx="20" fill="none" stroke="#1A1008" stroke-width="4" opacity=".10" transform="translate(4 4)"/>
+    <circle cx="55" cy="58" r="28" fill="#F2D8CC"/>
+    <path d="M55 38l16 30H39z" fill="none" stroke="#1A1008" stroke-width="3.5" stroke-linejoin="round"/>
+    <path d="M48 61l7-13 8 13" fill="none" stroke="#1A1008" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="104" y="54" fill="#8B7568" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" letter-spacing="2">01 · IDENTIDAD</text>
+    <text x="104" y="80" fill="#1A1008" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="800">Diseño y movimiento</text>
+    <text x="32" y="145" fill="#1A1008" font-family="Arial, Helvetica, sans-serif" font-size="19">
+      <tspan x="32" dy="0">Creé una portada ilustrada</tspan>
+      <tspan x="32" dy="30">y adaptable, con animaciones</tspan>
+      <tspan x="32" dy="30">suaves para dar vida al</tspan>
+      <tspan x="32" dy="30">universo del artista.</tspan>
+    </text>
+    <circle cx="43" cy="295" r="5" fill="#A35746"/>
+    <text x="60" y="301" fill="#72594B" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700">Responsive · movimiento reducido</text>
+  </g>
+
+  <g transform="translate(460 250)">
+    <rect width="360" height="350" rx="22" fill="#FFFDFC" stroke="#1A1008" stroke-width="2"/>
+    <rect x="8" y="8" width="360" height="350" rx="20" fill="none" stroke="#1A1008" stroke-width="4" opacity=".10" transform="translate(4 4)"/>
+    <circle cx="55" cy="58" r="28" fill="#E2E8D8"/>
+    <path d="M42 42h22a4 4 0 014 4v28H46a4 4 0 01-4-4z" fill="none" stroke="#1A1008" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M42 47h22M50 54h12M50 61h12" fill="none" stroke="#1A1008" stroke-width="2.5" stroke-linecap="round"/>
+    <text x="104" y="54" fill="#8B7568" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" letter-spacing="2">02 · CATÁLOGO</text>
+    <text x="104" y="80" fill="#1A1008" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="800">Tienda y carrito</text>
+    <text x="32" y="145" fill="#1A1008" font-family="Arial, Helvetica, sans-serif" font-size="19">
+      <tspan x="32" dy="0">Organicé los productos por</tspan>
+      <tspan x="32" dy="30">categoría, con selección de</tspan>
+      <tspan x="32" dy="30">tallas, cantidades y un</tspan>
+      <tspan x="32" dy="30">resumen claro de la compra.</tspan>
+    </text>
+    <circle cx="43" cy="295" r="5" fill="#4E705A"/>
+    <text x="60" y="301" fill="#72594B" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700">Libretas · prints · camisetas</text>
+  </g>
+
+  <g transform="translate(856 250)">
+    <rect width="360" height="350" rx="22" fill="#FFFDFC" stroke="#1A1008" stroke-width="2"/>
+    <rect x="8" y="8" width="360" height="350" rx="20" fill="none" stroke="#1A1008" stroke-width="4" opacity=".10" transform="translate(4 4)"/>
+    <circle cx="55" cy="58" r="28" fill="#E4D9E8"/>
+    <circle cx="48" cy="50" r="8" fill="none" stroke="#1A1008" stroke-width="3"/>
+    <circle cx="63" cy="50" r="8" fill="none" stroke="#1A1008" stroke-width="3"/>
+    <circle cx="55" cy="65" r="8" fill="none" stroke="#1A1008" stroke-width="3"/>
+    <text x="104" y="54" fill="#8B7568" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" letter-spacing="2">03 · PORTAFOLIO</text>
+    <text x="104" y="80" fill="#1A1008" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="800">Tres caminos creativos</text>
+    <text x="32" y="145" fill="#1A1008" font-family="Arial, Helvetica, sans-serif" font-size="19">
+      <tspan x="32" dy="0">Reuní el trabajo de Monstruo</tspan>
+      <tspan x="32" dy="30">Taller, MuN Ilustra y MuN</tspan>
+      <tspan x="32" dy="30">Tatux en una bitácora visual</tspan>
+      <tspan x="32" dy="30">con enlaces a sus perfiles.</tspan>
+    </text>
+    <circle cx="43" cy="295" r="5" fill="#766080"/>
+    <text x="60" y="301" fill="#72594B" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700">Libretas · murales · tatuajes</text>
+  </g>
+
+  <text x="64" y="656" fill="#72594B" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" letter-spacing="2">NEXT.JS · REACT · TYPESCRIPT</text>
+  <text x="1216" y="656" text-anchor="end" fill="#8B7568" font-family="Arial, Helvetica, sans-serif" font-size="15">PORTAFOLIO · CATÁLOGO · CONTACTO</text>
+</svg>

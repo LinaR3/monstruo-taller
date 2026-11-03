@@ -4,6 +4,15 @@ Sitio web visual de Monstruo Taller, un proyecto artístico independiente. Reún
 
 El sitio permite armar un pedido y coordinarlo directamente por WhatsApp. No procesa pagos en línea ni confirma compras automáticamente.
 
+## Lo que hice
+
+![Resumen visual de Monstruo Taller](docs/images/monstruo-resumen.svg)
+
+- Diseñé una portada ilustrada y adaptable, con animaciones suaves.
+- Organicé los productos en un catálogo con selección de tallas, cantidades y carrito.
+- Reuní Monstruo Taller, MuN Ilustra y MuN Tatux en un mismo portafolio.
+- Preparé el checkout para coordinar los pedidos directamente por WhatsApp.
+
 ## Secciones
 
 - **Inicio (`/`)**: presentación ilustrada, productos destacados y contacto con el taller.
@@ -13,6 +22,8 @@ El sitio permite armar un pedido y coordinarlo directamente por WhatsApp. No pro
 - **Checkout (`/checkout`)**: datos de envío, resumen de la compra y preparación del pedido para WhatsApp.
 
 ## Cómo funciona el pedido
+
+![Pasos para preparar y enviar un pedido por WhatsApp](docs/images/pedido-por-whatsapp.svg)
 
 1. La persona agrega productos al carrito y completa sus datos de envío.
 2. Elige PSE o transferencia como método de pago preferido.
