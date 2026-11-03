@@ -74,7 +74,13 @@
   margin: 48px 0 0;
   padding-top: 20px;
   border-top: 1px solid color-mix(in srgb, var(--text-color) 22%, transparent);
-  max-width: 610px;
+}
+
+@media (min-width: 1240px) {
+  .chapterNav {
+    margin-left: clamp(-96px, calc(620px - 50vw), 0px);
+    margin-right: clamp(-96px, calc(620px - 50vw), 0px);
+  }
 }
 
 .chapterNav a,
@@ -373,10 +379,17 @@
   .chapterNav {
     gap: 10px 20px;
     margin-top: 34px;
+    margin-left: calc(32px - 8vw);
+    margin-right: calc(32px - 8vw);
   }
 
   .chapterNav a {
     font-size: 0.82rem;
+  }
+
+  .chapterNav {
+    margin-left: 0;
+    margin-right: 0;
   }
 
   .chapters {

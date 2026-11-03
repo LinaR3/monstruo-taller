@@ -228,7 +228,7 @@ export default function UniversoPage() {
             <nav className={styles.chapterNav} aria-label="Explorar las prácticas artísticas">
               <a href="#taller"><span>01</span> Taller</a>
               <a href="#ilustra"><span>02</span> Ilustra</a>
-              <a href="#tatux"><span>03</span> Tatúa</a>
+              <a href="#tatux"><span>03</span> Tatuajes</a>
             </nav>
           </header>
 
