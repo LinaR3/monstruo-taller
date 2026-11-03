@@ -273,8 +273,10 @@
   }
 
   .textBottom {
-    top: 62%;
-    width: 44%;
+    top: auto;
+    bottom: 8%;
+    left: 4.62%;
+    width: min(40.63vw, 585px);
   }
 
   .textLine h2,
@@ -285,8 +287,9 @@
   }
 
   .textLine p {
-    font-size: clamp(2rem, 4vw, 4.8rem);
-    white-space: nowrap;
+    font-size: clamp(2rem, 4.17vw, 60px);
+    line-height: 2;
+    white-space: normal;
   }
 
   .eyeWrap {
