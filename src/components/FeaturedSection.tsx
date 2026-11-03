@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
 import { ChevronRight, ChevronLeft, ShoppingCart } from 'lucide-react'
 import { products, formatPrice } from '@/lib/products'
 import styles from './FeaturedSection.module.css'
@@ -41,10 +40,10 @@ export default function FeaturedSection() {
 
       {/* Header de la sección */}
       <div className={styles.sectionHeader}>
-        <div>
+        <div className={styles.headingGroup}>
           <h2 className={styles.title}>COSITAS NUEVAS</h2>
+          <p className={styles.subtitle}>Conoce nuestros más recientes lanzamientos</p>
         </div>
-        <Link href="/tienda" className={styles.verTodo}>Ver todo →</Link>
       </div>
 
       {/* Carrusel */}
