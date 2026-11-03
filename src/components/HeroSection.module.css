@@ -161,8 +161,6 @@
   height: auto;
   opacity: 0.92;
   filter: drop-shadow(0 4px 12px rgba(0,0,0,0.2));
-  animation: blink 3.8s ease-in-out infinite;
-  transform-origin: center center;
 }
 
 /* CTA mobile */
@@ -213,11 +211,6 @@
   from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-@keyframes blink {
-  0%, 87%, 93%, 100% { transform: scaleY(1); }
-  90%             { transform: scaleY(0.04); }
-}
-
 /* ═══════════════════════════════════════════════
    DESKTOP ≥ 900px — layout dos columnas
 ═══════════════════════════════════════════════ */
