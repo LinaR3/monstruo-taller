@@ -27,8 +27,8 @@
 /* Mobile: decorativos de fondo, no interfieren con contenido */
 .bgTextTop {
   font-size: clamp(3rem, 18vw, 6.5rem);
-  top: 16%;
-  right: 2%;
+  top: 18%;
+  right: -10%;
   opacity: 1;
   z-index: 0;
   color: var(--text-color);
@@ -38,8 +38,8 @@
 
 .bgTextBottom {
   font-size: clamp(3rem, 18vw, 6.5rem);
-  top: 42%;
-  left: 2%;
+  top: 40%;
+  left: -10%;
   opacity: 1;
   z-index: 0;
   color: var(--text-color);
@@ -50,25 +50,26 @@
 /* ── MONSTRUO ── */
 .mainTitle {
   font-family: var(--font-artistic);
-  font-size: clamp(2.8rem, 23vw, 300px);
+  font-size: clamp(4rem, 18vw, 300px);
   width: 100%;
   margin: 0;
   line-height: 0.9;
   position: relative;
-  z-index: 3;
+  z-index: 2;
   letter-spacing: 2px;
   color: var(--text-color);
   text-align: center;
+  white-space: nowrap;
   opacity: 0;
   animation: slideFromRight 0.75s cubic-bezier(0.22,1,0.36,1) 0.12s both;
 }
 
 /* ── CORAZÓN ── */
 .heroImageContainer {
-  margin-top: -8vw;
+  margin-top: -18vw;
   position: relative;
   z-index: 3;
-  width: min(90vw, 500px);
+  width: min(88vw, 1100px);
   max-width: 100%;
   pointer-events: none;
   opacity: 0;
@@ -216,12 +217,12 @@
 ═══════════════════════════════════════════════ */
 @media (min-width: 900px) {
 
-  .hero { padding-top: 140px; }
+  .hero { padding-top: 30px; }
 
   .bgTextTop {
     font-size: clamp(18rem, 20.84vw, 300px);
     top: 0;
-    right: 0;
+    right: -7%;
     bottom: auto;
     mix-blend-mode: normal;
   }
@@ -230,15 +231,22 @@
     font-size: clamp(18rem, 20.84vw, 300px);
     top: 50%;
     bottom: auto;
-    left: 0;
+    left: -7%;
     mix-blend-mode: normal;
     transform: rotate(180deg);
   }
 
   .heroImageContainer {
-    margin-top: -22vw;
-    width: min(78.25vw, 1127px);
+    margin-top: calc(-18vw - 65px);
+    width: min(88vw, 1127px);
     max-width: none;
+  }
+
+  .mainTitle {
+    font-size: clamp(240px, 18.35vw, 340px);
+    line-height: 0.9;
+    margin-top: 3.5rem;
+    top: 30px;
   }
 
   .bottomBlock {
