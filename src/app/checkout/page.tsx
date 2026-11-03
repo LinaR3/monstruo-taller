@@ -10,7 +10,7 @@ import styles from './checkout.module.css'
 import { Trash2 } from 'lucide-react'
 
 const WHATSAPP_NUMBER = '573133314271'
-const SHIPPING = 10000
+const SHIPPING_ESTIMATE = 10000
 
 export default function CheckoutPage() {
   const { items, removeItem } = useCart()
@@ -26,7 +26,7 @@ export default function CheckoutPage() {
   const subtotal = items.reduce((acc, i) =>
     acc + i.price * i.qty, 0)
   const discount = couponApplied ? Math.round(subtotal * 0.1) : 0
-  const total = subtotal - discount + (items.length > 0 ? SHIPPING : 0)
+  const total = subtotal - discount + (items.length > 0 ? SHIPPING_ESTIMATE : 0)
   const fmt = (n: number) => `$${n.toLocaleString('es-CO')} COP`
   const set = (key: keyof typeof form) =>
     (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
@@ -53,10 +53,11 @@ Teléfono: ${form.telefono}
 ${productosTexto}
 
 Subtotal: ${fmt(subtotal)}
-${couponApplied ? `Descuento (10%): -${fmt(discount)}\n` : ''}Envío: ${fmt(SHIPPING)}
-*TOTAL: ${fmt(total)}*
+${couponApplied ? `Descuento (10%): -${fmt(discount)}\n` : ''}Envío aproximado: ${fmt(SHIPPING_ESTIMATE)}
+*TOTAL APROXIMADO: ${fmt(total)}*
 Método de pago preferido: ${payMethod === 'pse' ? 'PSE' : 'Transferencia'}
 
+El valor final del envío se confirmará por WhatsApp según tu ubicación.
 Por favor, confírmame el pedido y los pasos para completar el pago.`
 
     const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`
@@ -227,13 +228,15 @@ Por favor, confírmame el pedido y los pasos para completar el pago.`
                     </div>
                   )}
                   <div className={styles.totalRow}>
-                    <span>Envío</span><span>{fmt(SHIPPING)}</span>
+                    <span>Envío aprox.</span><span>{fmt(SHIPPING_ESTIMATE)}</span>
                   </div>
                   <div className={styles.divider} />
                   <div className={`${styles.totalRow} ${styles.grandTotal}`}>
-                    <span>Total</span><span>{fmt(total)}</span>
+                    <span>Total aprox.</span><span>{fmt(total)}</span>
                   </div>
-                  <p className={styles.taxNote}>Incluye impuestos</p>
+                  <p className={styles.taxNote}>
+                    Incluye impuestos. El envío es aproximado; confirmaremos el valor final según tu ubicación por WhatsApp.
+                  </p>
                 </div>
               </div>
 
