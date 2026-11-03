@@ -296,12 +296,12 @@
 
   .eyeWrap {
     position: absolute;
-    top: 36%;
-    left: 4%;
+    top: 39.6%;
+    left: 8.64%;
     width: auto;
   }
 
-  .ojoImg { width: clamp(220px, 22vw, 360px); }
+  .ojoImg { width: min(20.84vw, 300px); }
 
   .ctaWrap {
     position: absolute;
