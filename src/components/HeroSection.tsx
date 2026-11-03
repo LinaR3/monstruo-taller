@@ -1,6 +1,5 @@
 'use client'
 
-import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import styles from './HeroSection.module.css'
 
@@ -104,9 +103,6 @@ export default function HeroSection() {
           <p>Y NADIE SABE CÓMO ES</p>
         </div>
 
-        <div className={styles.ctaWrap}>
-          <Link href="/tienda" className={styles.ctaBtn}>VER TIENDA</Link>
-        </div>
       </div>
     </section>
   )
