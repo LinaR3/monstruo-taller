@@ -247,8 +247,8 @@
 
   .heroImageContainer {
     margin-top: -22vw;
-    max-width: 1000px;
-    width: 100%;
+    width: min(78.25vw, 1127px);
+    max-width: none;
   }
 
   .bottomBlock {
