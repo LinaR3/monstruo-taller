@@ -32,23 +32,36 @@
   opacity: 0.45;
 }
 
+.titleFlow {
+  display: flow-root;
+}
+
+.birdShape {
+  float: left;
+  width: min(44%, 500px);
+  height: auto;
+  margin: 0 22px 16px 0;
+  shape-outside: url('/Aves4white.png');
+  shape-image-threshold: 0.3;
+  shape-margin: 15px;
+}
+
+[data-theme='dark'] .birdShape {
+  filter: invert(1);
+}
+
 .title {
+  max-width: none;
   font-family: var(--font-artistic);
   font-weight: 400;
   font-size: clamp(3.25rem, 7.2vw, 7.5rem);
-  line-height: 0.87;
+  line-height: 0.91;
   letter-spacing: -0.045em;
 }
 
-.title span {
-  display: block;
-  margin-left: clamp(0px, 12vw, 160px);
-  margin-top: 0.12em;
-}
-
 .introText {
-  max-width: 610px;
-  margin: 34px 0 0 clamp(0px, 12vw, 160px);
+  max-width: none;
+  margin: 24px 0 0;
   font-size: clamp(1rem, 1.45vw, 1.2rem);
   line-height: 1.65;
 }
@@ -57,7 +70,8 @@
   display: flex;
   flex-wrap: wrap;
   gap: 12px 30px;
-  margin: 52px 0 0 clamp(0px, 12vw, 160px);
+  clear: both;
+  margin: 48px 0 0;
   padding-top: 20px;
   border-top: 1px solid color-mix(in srgb, var(--text-color) 22%, transparent);
   max-width: 610px;
@@ -331,12 +345,8 @@
   }
 
   .title {
-    font-size: clamp(2.55rem, 13vw, 4.2rem);
+    font-size: clamp(2.3rem, 10.8vw, 4rem);
     line-height: 0.9;
-  }
-
-  .title span {
-    margin: 0.08em 0 0;
   }
 
   .introText,
@@ -344,8 +354,15 @@
     margin-left: 0;
   }
 
+  .birdShape {
+    width: min(43%, 215px);
+    margin-right: 10px;
+    margin-bottom: 10px;
+    shape-margin: 9px;
+  }
+
   .introText {
-    margin-top: 25px;
+    margin-top: 18px;
     font-size: 0.98rem;
   }
 
@@ -440,7 +457,7 @@
 
 @media (max-width: 380px) {
   .title {
-    font-size: 2.6rem;
+    font-size: 2.3rem;
   }
 
   .chapterActions {

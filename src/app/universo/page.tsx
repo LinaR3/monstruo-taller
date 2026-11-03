@@ -208,14 +208,22 @@ export default function UniversoPage() {
         <RevealScope>
           <header className={styles.intro}>
             <p className={styles.overline}>MONSTRUO TALLER <span>·</span> BITÁCORA VISUAL</p>
-            <h1 className={styles.title}>
-              UN UNIVERSO
-              <span>QUE SE EXPANDE</span>
-            </h1>
-            <p className={styles.introText}>
-              Dibujos que salen del papel y encuentran otras formas: objetos de taller,
-              murales y tatuajes. Tres caminos que nacen de una misma imaginación.
-            </p>
+            <div className={styles.titleFlow}>
+              <Image
+                src="/Aves4white.png"
+                alt=""
+                aria-hidden="true"
+                width={2953}
+                height={2586}
+                priority
+                className={styles.birdShape}
+              />
+              <h1 className={styles.title}>UN UNIVERSO QUE SE EXPANDE</h1>
+              <p className={styles.introText}>
+                Dibujos que salen del papel y encuentran otras formas: objetos de taller,
+                murales y tatuajes. Tres caminos que nacen de una misma imaginación.
+              </p>
+            </div>
             <nav className={styles.chapterNav} aria-label="Explorar las prácticas artísticas">
               <a href="#taller"><span>01</span> Taller</a>
               <a href="#ilustra"><span>02</span> Ilustra</a>
