@@ -72,7 +72,7 @@
   max-width: 100%;
   pointer-events: none;
   opacity: 0;
-  animation: slideFromBottom 0.8s cubic-bezier(0.22,1,0.36,1) forwards;
+  animation: slideFromBottom 0.8s cubic-bezier(0.22,1,0.36,1) 0.2s forwards;
 }
 
 .heartImg {
