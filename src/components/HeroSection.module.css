@@ -214,14 +214,15 @@
 }
 
 @keyframes eyeBlink {
-  0%, 54%, 58%, 100% { clip-path: ellipse(75% 75% at 50% 50%); }
-  55.5% { clip-path: ellipse(75% 15% at 50% 50%); }
+  0%, 52%, 60%, 100% { clip-path: ellipse(75% 75% at 50% 50%); }
+  54%, 58% { clip-path: ellipse(75% 15% at 50% 50%); }
   56% { clip-path: ellipse(75% 1.5% at 50% 50%); }
 }
 
 @keyframes eyeLid {
-  0%, 54%, 58%, 100% { opacity: 0; }
-  55.5%, 56% { opacity: 0.9; }
+  0%, 52%, 60%, 100% { opacity: 0; }
+  54%, 58% { opacity: 0.4; }
+  56% { opacity: 0.9; }
 }
 /* ═══════════════════════════════════════════════
    DESKTOP ≥ 900px — layout dos columnas
